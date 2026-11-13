@@ -1,0 +1,2008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GOURAV // EDITRIFY — The Cutroom Archive (Video, Motion & Brand Direction)</title>
+  <meta name="description" content="Portfolio of Gourav — Video Editor, Motion & Graphic Designer, and Founder of Editrify. 3+ years turning raw footage into work people actually want to watch." />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Syne, Instrument Serif, Plus Jakarta Sans, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            white: '#ECE5D8',
+            paper: '#ECE5D8',
+            paperDeep: '#E2D9C8',
+            paperCard: '#E4DCCB',
+            ink: '#121110',
+            inkSoft: '#22201E',
+            vermilion: '#E8381B',
+            chartreuse: '#D4E824',
+            brass: '#C89D54',
+            slateWarm: '#6E6A63'
+          },
+          fontFamily: {
+            display: ['Syne', 'sans-serif'],
+            serif: ['"Instrument Serif"', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --bg-primary: #ECE5D8;
+      --bg-secondary: #E2D9C8;
+      --bg-card: #E4DCCB;
+      --text-primary: #121110;
+      --text-muted: #5C5852;
+      --border-hairline: rgba(18, 17, 16, 0.16);
+      --accent-vermilion: #E8381B;
+      --accent-chartreuse: #D4E824;
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-cinema: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    html {
+      scroll-behavior: auto; /* Handled by custom 60fps cubic-bezier glide & optional page-snap */
+    }
+
+    html.page-snap-active {
+      scroll-snap-type: y proximity;
+    }
+
+    html.page-snap-active .page-scene {
+      scroll-snap-align: start;
+      scroll-margin-top: 56px;
+    }
+
+    html.darkroom {
+      --bg-primary: #121110;
+      --bg-secondary: #1A1816;
+      --bg-card: #1F1C19;
+      --text-primary: #ECE5D8;
+      --text-muted: #A39E93;
+      --border-hairline: rgba(236, 229, 216, 0.15);
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+      transition: background-color 0.55s var(--ease-out-expo), color 0.55s var(--ease-out-expo);
+    }
+
+    /* Subtle 35mm Analog Film Grain Overlay */
+    .film-grain {
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+    }
+
+    /* Architectural Swiss Hairline Borders */
+    .swiss-border-b { border-bottom: 1px solid var(--border-hairline); }
+    .swiss-border-t { border-top: 1px solid var(--border-hairline); }
+    .swiss-border-r { border-right: 1px solid var(--border-hairline); }
+    .swiss-border-l { border-left: 1px solid var(--border-hairline); }
+    .swiss-border { border: 1px solid var(--border-hairline); }
+
+    /* Custom Viewfinder Corner Marks */
+    .corner-mark {
+      position: relative;
+    }
+    .corner-mark::before,
+    .corner-mark::after {
+      content: '';
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-color: #E8381B;
+      pointer-events: none;
+      transition: transform 0.35s var(--ease-out-expo);
+    }
+    .corner-mark::before {
+      top: -1px;
+      left: -1px;
+      border-top: 2px solid #E8381B;
+      border-left: 2px solid #E8381B;
+    }
+    .corner-mark::after {
+      bottom: -1px;
+      right: -1px;
+      border-bottom: 2px solid #E8381B;
+      border-right: 2px solid #E8381B;
+    }
+    .corner-mark:hover::before { transform: translate(-4px, -4px); }
+    .corner-mark:hover::after { transform: translate(4px, 4px); }
+
+    /* Infinite Kinetic Marquee */
+    @keyframes marqueeScroll {
+      0% { transform: translate3d(0%, 0, 0); }
+      100% { transform: translate3d(-50%, 0, 0); }
+    }
+    .animate-marquee {
+      display: flex;
+      width: max-content;
+      will-change: transform;
+      animation: marqueeScroll 28s linear infinite;
+    }
+    .animate-marquee:hover {
+      animation-play-state: paused;
+    }
+
+    /* Audio Meter Bars Animation */
+    @keyframes eqBar {
+      0%, 100% { transform: scaleY(0.25); }
+      50% { transform: scaleY(1); }
+    }
+    .eq-bar-1 { animation: eqBar 0.8s ease-in-out infinite; }
+    .eq-bar-2 { animation: eqBar 0.55s ease-in-out infinite 0.15s; }
+    .eq-bar-3 { animation: eqBar 0.95s ease-in-out infinite 0.3s; }
+    .eq-bar-4 { animation: eqBar 0.65s ease-in-out infinite 0.1s; }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-primary);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #E8381B;
+      border-radius: 2px;
+    }
+
+    /* Clean Topic-Only Discipline Row Hover Effect */
+    .discipline-row {
+      will-change: transform, padding-left, background-color;
+      transition: background-color 0.32s var(--ease-out-expo),
+                  color 0.32s var(--ease-out-expo),
+                  padding-left 0.38s var(--ease-out-expo),
+                  opacity 0.6s var(--ease-cinema),
+                  transform 0.6s var(--ease-cinema);
+    }
+    .discipline-row:hover,
+    .discipline-row.active-track {
+      background-color: #E8381B;
+      color: #ECE5D8 !important;
+      padding-left: 2.25rem;
+    }
+    .discipline-row:hover .muted-tag,
+    .discipline-row.active-track .muted-tag {
+      color: #ECE5D8 !important;
+      border-color: rgba(236, 229, 216, 0.45) !important;
+    }
+
+    /* Clean Tactile Swiss-Editorial Magnetic Hover Lift */
+    .editorial-lift {
+      will-change: transform, box-shadow;
+      transition: transform 0.32s var(--ease-out-expo),
+                  box-shadow 0.32s var(--ease-out-expo),
+                  border-color 0.25s ease,
+                  background-color 0.25s ease,
+                  color 0.25s ease;
+    }
+    .editorial-lift:hover {
+      transform: translate3d(0, -3px, 0);
+      box-shadow: 0 14px 30px -8px rgba(18, 17, 16, 0.26);
+    }
+    .editorial-lift:active {
+      transform: translate3d(0, -1px, 0) scale(0.99);
+    }
+
+    /* =========================================================
+       GPU-ACCELERATED PAGE-BY-PAGE SCROLL REVEAL ARCHITECTURE
+    ========================================================== */
+    .page-scene {
+      position: relative;
+      will-change: transform, opacity;
+    }
+
+    /* Base reveal item states */
+    .reveal-up {
+      opacity: 0;
+      transform: translate3d(0, 44px, 0) scale(0.985);
+      will-change: transform, opacity;
+      transition: opacity 0.85s var(--ease-cinema),
+                  transform 0.85s var(--ease-cinema);
+      transition-delay: var(--stagger-delay, 0ms);
+    }
+    .reveal-up.is-visible {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translate3d(-38px, 0, 0);
+      will-change: transform, opacity;
+      transition: opacity 0.8s var(--ease-cinema),
+                  transform 0.8s var(--ease-cinema);
+      transition-delay: var(--stagger-delay, 0ms);
+    }
+    .reveal-left.is-visible {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+
+    .reveal-scale {
+      opacity: 0;
+      transform: translate3d(0, 32px, 0) scale(0.94);
+      will-change: transform, opacity;
+      transition: opacity 0.9s var(--ease-cinema),
+                  transform 0.9s var(--ease-cinema);
+      transition-delay: var(--stagger-delay, 0ms);
+    }
+    .reveal-scale.is-visible {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    /* Project Card 3D Perspective Entrance */
+    .project-card-anim {
+      opacity: 0;
+      transform: perspective(1000px) translate3d(0, 46px, 0) rotateX(6deg) scale(0.96);
+      will-change: transform, opacity;
+      transition: opacity 0.75s var(--ease-cinema),
+                  transform 0.75s var(--ease-cinema),
+                  border-color 0.3s ease,
+                  box-shadow 0.35s var(--ease-out-expo);
+      transition-delay: var(--card-delay, 0ms);
+    }
+    .project-card-anim.is-visible {
+      opacity: 1;
+      transform: perspective(1000px) translate3d(0, 0, 0) rotateX(0deg) scale(1);
+    }
+    .project-card-anim.is-visible:hover {
+      transform: perspective(1000px) translate3d(0, -6px, 0) scale(1.01);
+      box-shadow: 0 22px 44px -12px rgba(0, 0, 0, 0.65);
+    }
+
+    /* Track Inspector Smooth Crossfade Transition */
+    #inspector-card-inner {
+      transition: opacity 0.24s var(--ease-out-expo), transform 0.24s var(--ease-out-expo);
+      will-change: opacity, transform;
+    }
+    #inspector-card-inner.switching {
+      opacity: 0;
+      transform: translate3d(0, 8px, 0) scale(0.985);
+    }
+
+    /* Adobe Mastery Progress Bar Scroll Fill */
+    .skill-bar-fill {
+      width: 0%;
+      will-change: width;
+      transition: width 1.35s cubic-bezier(0.16, 1, 0.3, 1);
+      transition-delay: 0.2s;
+    }
+
+    /* Cinema Modal Smooth Entrance */
+    #cinema-modal {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s var(--ease-out-expo);
+    }
+    #cinema-modal.modal-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    #cinema-modal-stage {
+      transform: scale(0.95) translate3d(0, 14px, 0);
+      transition: transform 0.42s var(--ease-out-expo);
+    }
+    #cinema-modal.modal-open #cinema-modal-stage {
+      transform: scale(1) translate3d(0, 0, 0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal-up, .reveal-left, .reveal-scale, .project-card-anim {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="antialiased selection:bg-vermilion selection:text-paper relative">
+
+  <!-- =========================================================
+       HIDDEN SVG DEFINITIONS:
+       1. Subject Isolation Clip-Paths for Gourav's Real Portrait
+       2. Authentic Official Brand Logos (Pr, Ae, Ps, Ai, WhatsApp, IG, Gmail, Phone, YT, Editrify)
+  ========================================================== -->
+  <svg width="0" height="0" class="absolute pointer-events-none" aria-hidden="true">
+    <defs>
+      <!-- Full Upper-Body Cutout for Hero Viewfinder -->
+      <clipPath id="gourav-torso-cutout" clipPathUnits="objectBoundingBox">
+        <path d="M 0.36,0.03 C 0.45,0.01 0.56,0.01 0.63,0.05 C 0.66,0.09 0.65,0.17 0.64,0.24 C 0.63,0.29 0.60,0.32 0.62,0.34 C 0.72,0.36 0.84,0.39 0.89,0.47 C 0.92,0.58 0.90,0.75 0.84,0.87 C 0.80,0.93 0.79,0.97 0.78,1.00 L 0.21,1.00 C 0.21,0.96 0.20,0.91 0.16,0.85 C 0.10,0.74 0.09,0.57 0.12,0.46 C 0.17,0.38 0.29,0.36 0.38,0.34 C 0.40,0.31 0.37,0.28 0.36,0.23 C 0.34,0.16 0.33,0.08 0.36,0.03 Z" />
+      </clipPath>
+      <!-- Close-up Editorial Head & Shoulders Cutout -->
+      <clipPath id="gourav-head-cutout" clipPathUnits="objectBoundingBox">
+        <path d="M 0.35,0.02 C 0.45,0.00 0.57,0.00 0.64,0.05 C 0.67,0.10 0.66,0.19 0.64,0.26 C 0.63,0.30 0.61,0.33 0.64,0.35 C 0.76,0.38 0.88,0.42 0.92,0.54 L 0.92,0.72 L 0.08,0.72 L 0.08,0.53 C 0.13,0.41 0.26,0.37 0.37,0.35 C 0.39,0.32 0.37,0.29 0.35,0.24 C 0.33,0.17 0.32,0.08 0.35,0.02 Z" />
+      </clipPath>
+
+      <!-- Official Adobe Premiere Pro SVG Logo -->
+      <symbol id="logo-premiere" viewBox="0 0 240 234">
+        <rect width="240" height="234" rx="42.5" fill="#00005B"/>
+        <path d="M58 58H105C130 58 145 72 145 96C145 121 129 135 103 135H82V174H58V58ZM82 114H102C115 114 122 107 122 96C122 85 115 79 102 79H82V114Z" fill="#9999FF"/>
+        <path d="M156 91H177V104C182 95 191 89 202 89C205 89 207 89 209 90V113C206 112 202 112 198 112C186 112 179 119 179 133V174H156V91Z" fill="#9999FF"/>
+      </symbol>
+
+      <!-- Official Adobe After Effects SVG Logo -->
+      <symbol id="logo-aftereffects" viewBox="0 0 240 234">
+        <rect width="240" height="234" rx="42.5" fill="#00005B"/>
+        <path d="M111 149H73L64 174H39L79 58H106L146 174H120L111 149ZM79 128H105L92 84L79 128Z" fill="#9999FF"/>
+        <path d="M150 132C150 105 168 88 193 88C217 88 232 104 232 129C232 133 231 137 231 138H172C173 151 182 157 195 157C205 157 213 154 220 150L227 167C218 173 206 176 193 176C166 176 150 159 150 132ZM210 122C210 111 203 105 192 105C181 105 174 112 172 122H210Z" fill="#9999FF"/>
+      </symbol>
+
+      <!-- Official Adobe Photoshop SVG Logo -->
+      <symbol id="logo-photoshop" viewBox="0 0 240 234">
+        <rect width="240" height="234" rx="42.5" fill="#001E36"/>
+        <path d="M56 58H103C128 58 144 72 144 96C144 121 128 135 101 135H80V174H56V58ZM80 114H100C113 114 120 107 120 96C120 85 113 79 100 79H80V114Z" fill="#31A8FF"/>
+        <path d="M151 164L159 146C166 152 177 156 187 156C196 156 201 153 201 148C201 142 195 140 183 136C165 131 154 123 154 108C154 92 168 81 189 81C202 81 213 84 221 89L213 107C206 102 197 99 189 99C181 99 176 102 176 107C176 112 181 114 193 118C212 124 223 131 223 147C223 164 209 175 186 175C171 175 159 171 151 164Z" fill="#31A8FF"/>
+      </symbol>
+
+      <!-- Official Adobe Illustrator SVG Logo -->
+      <symbol id="logo-illustrator" viewBox="0 0 240 234">
+        <rect width="240" height="234" rx="42.5" fill="#330000"/>
+        <path d="M116 149H78L69 174H44L84 58H111L151 174H125L116 149ZM84 128H110L97 84L84 128Z" fill="#FF9A00"/>
+        <circle cx="177" cy="64" r="14" fill="#FF9A00"/>
+        <rect x="165" y="90" width="24" height="84" rx="3" fill="#FF9A00"/>
+      </symbol>
+
+      <!-- Official WhatsApp SVG Logo -->
+      <symbol id="logo-whatsapp" viewBox="0 0 48 48">
+        <circle cx="24" cy="24" r="22" fill="#25D366"/>
+        <path d="M34.6 28.8C34 28.5 31.2 27.1 30.7 26.9C30.2 26.7 29.8 26.6 29.4 27.2C29 27.8 27.9 29.1 27.6 29.5C27.3 29.9 26.9 29.9 26.3 29.6C25.7 29.3 23.9 28.7 21.7 26.8C20 25.3 18.8 23.4 18.5 22.8C18.2 22.2 18.5 21.9 18.8 21.6C19.1 21.3 19.4 20.9 19.7 20.5C20 20.1 20.1 19.9 20.3 19.5C20.5 19.1 20.4 18.7 20.2 18.4C20 18.1 18.9 15.3 18.4 14.2C17.9 13.1 17.4 13.3 17.1 13.3C16.7 13.3 16.3 13.3 15.9 13.3C15.5 13.3 14.9 13.5 14.3 14.1C13.8 14.7 12.2 16.1 12.2 18.9C12.2 21.7 14.3 24.5 14.6 24.9C14.9 25.3 18.8 31.2 24.7 33.7C26.1 34.3 27.2 34.7 28.1 35C29.5 35.4 30.8 35.3 31.8 35.2C33 35 35.3 33.8 35.8 32.4C36.3 31 36.3 29.8 36.1 29.5C35.9 29.2 35.2 29.1 34.6 28.8Z" fill="#FFFFFF"/>
+      </symbol>
+
+      <!-- Official Instagram Gradient SVG Logo -->
+      <symbol id="logo-instagram" viewBox="0 0 48 48">
+        <defs>
+          <radialGradient id="ig-grad" cx="30%" cy="107%" r="125%">
+            <stop offset="0%" stop-color="#FDF497"/>
+            <stop offset="5%" stop-color="#FDF497"/>
+            <stop offset="45%" stop-color="#FD5949"/>
+            <stop offset="60%" stop-color="#D6249F"/>
+            <stop offset="90%" stop-color="#285AEB"/>
+          </radialGradient>
+        </defs>
+        <rect x="3" y="3" width="42" height="42" rx="12" fill="url(#ig-grad)"/>
+        <rect x="9.5" y="9.5" width="29" height="29" rx="8" fill="none" stroke="#FFFFFF" stroke-width="3"/>
+        <circle cx="24" cy="24" r="7" fill="none" stroke="#FFFFFF" stroke-width="3"/>
+        <circle cx="33" cy="15" r="2.2" fill="#FFFFFF"/>
+      </symbol>
+
+      <!-- Official Gmail 4-Color SVG Logo -->
+      <symbol id="logo-gmail" viewBox="0 0 48 48">
+        <rect x="2" y="6" width="44" height="36" rx="6" fill="#FFFFFF"/>
+        <path d="M6 12V36H13V21L24 29L35 21V36H42V12C42 9.8 39.5 8.5 37.7 9.8L24 20L10.3 9.8C8.5 8.5 6 9.8 6 12Z" fill="#EA4335"/>
+        <path d="M6 12V36H13V21L6 15.8V12Z" fill="#4285F4"/>
+        <path d="M42 12V36H35V21L42 15.8V12Z" fill="#34A853"/>
+        <path d="M35 21V11.8L42 12V15.8L35 21Z" fill="#FBBC05"/>
+      </symbol>
+
+      <!-- Official Glossy iOS / Android Phone Call App SVG Logo -->
+      <symbol id="logo-phone" viewBox="0 0 48 48">
+        <defs>
+          <linearGradient id="phone-app-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#65E879"/>
+            <stop offset="100%" stop-color="#1DB93B"/>
+          </linearGradient>
+        </defs>
+        <rect x="2" y="2" width="44" height="44" rx="12" fill="url(#phone-app-grad)"/>
+        <path d="M34.2 29.4C32.4 29.4 30.6 29.1 29 28.5C28.5 28.3 27.8 28.5 27.4 28.9L24.2 32.1C19.8 29.9 16.1 26.2 13.9 21.8L17.1 18.6C17.5 18.2 17.7 17.5 17.5 17C16.9 15.4 16.6 13.6 16.6 11.8C16.6 10.8 15.8 10 14.8 10H10.8C9.8 10 9 10.8 9 11.8C9 26.8 21.2 39 36.2 39C37.2 39 38 38.2 38 37.2V33.2C38 32.2 37.2 31.4 36.2 31.4H34.2V29.4Z" fill="#FFFFFF"/>
+      </symbol>
+
+      <!-- Official YouTube SVG Logo -->
+      <symbol id="logo-youtube" viewBox="0 0 48 48">
+        <rect x="3" y="9" width="42" height="30" rx="8" fill="#FF0000"/>
+        <path d="M20 17.5V30.5L31 24L20 17.5Z" fill="#FFFFFF"/>
+      </symbol>
+
+      <!-- Official Editrify Lightning-E SVG Logo -->
+      <symbol id="logo-editrify" viewBox="0 0 120 120">
+        <rect width="120" height="120" rx="24" fill="#121110"/>
+        <path d="M42 20H102L93 38H53L44 56H84L76 72H36L26 72L42 20Z" fill="#FFFFFF"/>
+        <path d="M46 84H88L79 102H32L46 84Z" fill="#FFFFFF"/>
+        <path d="M62 34L36 66H52L30 106L74 56H55L62 34Z" fill="#0066FF"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- Fixed Analog Film Grain Overlay -->
+  <div class="fixed inset-0 pointer-events-none film-grain z-30"></div>
+
+  <!-- ==========================================
+       TOP STICKY SWISS TIMECODE HUD MASTHEAD
+  =========================================== -->
+  <header class="sticky top-0 z-40 backdrop-blur-md bg-[var(--bg-primary)]/90 swiss-border-b transition-colors duration-300">
+    <div class="max-w-[1440px] mx-auto grid grid-cols-2 md:grid-cols-12 items-center text-xs font-mono">
+      
+      <!-- Brand / Issue ID with Real Editrify Logo -->
+      <a href="#top" onclick="handleNavClick(event, '#top')" class="col-span-1 md:col-span-3 px-4 md:px-6 py-3.5 swiss-border-r flex items-center gap-3 group">
+        <svg class="w-8 h-8 rounded-lg shrink-0 shadow"><use href="#logo-editrify"></use></svg>
+        <div>
+          <span class="font-display font-extrabold text-sm tracking-tight block leading-none group-hover:text-vermilion transition-colors">GOURAV // EDITRIFY</span>
+          <span class="text-[10px] opacity-60 tracking-widest uppercase">ARCHIVE VOL. 26</span>
+        </div>
+      </a>
+
+      <!-- Live 24FPS Timecode + Audio Meter -->
+      <div class="hidden md:flex md:col-span-3 px-5 py-3.5 swiss-border-r items-center justify-between">
+        <div>
+          <span class="text-[10px] uppercase opacity-50 block">SMPTE TC (24 FPS)</span>
+          <span id="live-timecode" class="font-mono font-semibold text-vermilion tracking-wider text-xs">00:03:14:08</span>
+        </div>
+        <div class="flex items-end gap-0.5 h-4 px-2 py-0.5 swiss-border rounded" title="Master Bus -3.2dB">
+          <span class="w-1 h-full bg-emerald-500 origin-bottom eq-bar-1"></span>
+          <span class="w-1 h-full bg-emerald-500 origin-bottom eq-bar-2"></span>
+          <span class="w-1 h-full bg-chartreuse origin-bottom eq-bar-3"></span>
+          <span class="w-1 h-full bg-vermilion origin-bottom eq-bar-4"></span>
+          <span class="text-[9px] ml-1 opacity-60">-3dB</span>
+        </div>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="hidden md:flex md:col-span-4 px-4 py-3.5 swiss-border-r items-center justify-around uppercase tracking-wider text-[11px]">
+        <a href="#disciplines" onclick="handleNavClick(event, '#disciplines')" class="hover:text-vermilion transition-colors">[01] Matrix</a>
+        <a href="#screening-room" onclick="handleNavClick(event, '#screening-room')" class="hover:text-vermilion transition-colors font-semibold">[02] 15 Cuts</a>
+        <a href="#dossier" onclick="handleNavClick(event, '#dossier')" class="hover:text-vermilion transition-colors">[03] Dossier</a>
+        <a href="#dispatch" onclick="handleNavClick(event, '#dispatch')" class="hover:text-vermilion transition-colors">[04] Dispatch</a>
+      </nav>
+
+      <!-- Page-Snap Toggle, Darkroom Toggle & Quick Action -->
+      <div class="col-span-1 md:col-span-2 px-3 py-2.5 flex items-center justify-end md:justify-between gap-1.5">
+        <button id="snap-toggle" onclick="togglePageSnapMode()" title="Toggle Page-by-Page Scroll Snap" class="hidden sm:inline-flex px-2.5 py-1.5 rounded swiss-border hover:border-vermilion items-center gap-1 text-[10px] uppercase tracking-wider transition-all">
+          <i class="ph-bold ph-arrows-out-line-vertical text-vermilion"></i>
+          <span id="snap-text">Snap: Off</span>
+        </button>
+        <button id="theme-toggle" onclick="toggleDarkroom()" class="px-2.5 py-1.5 rounded swiss-border hover:border-vermilion flex items-center gap-1.5 text-[10px] uppercase tracking-wider transition-all">
+          <i id="theme-icon" class="ph-fill ph-film-strip text-vermilion text-sm"></i>
+          <span id="theme-text">Darkroom</span>
+        </button>
+        <a href="#dispatch" onclick="handleNavClick(event, '#dispatch')" class="editorial-lift hidden xl:inline-flex px-3 py-1.5 bg-ink text-paper font-semibold rounded-full text-[10px] uppercase tracking-wider hover:bg-vermilion transition">
+          Hire
+        </a>
+      </div>
+    </div>
+
+    <!-- Smooth 60fps SMPTE Timeline Scroll Progress Bar -->
+    <div class="w-full h-[3px] bg-ink/10 overflow-hidden relative">
+      <div id="scroll-progress-bar" class="h-full bg-vermilion origin-left will-change-transform" style="transform: scaleX(0);"></div>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       PAGE SCENE 00: HERO SECTION
+       (Kept ONLY "REEL '26 · Video Editor · Motion & Graphic Designer")
+  =========================================== -->
+  <section id="top" data-scene-id="top" class="page-scene max-w-[1440px] mx-auto swiss-border-b relative overflow-hidden">
+    <div class="grid grid-cols-1 lg:grid-cols-12">
+      
+      <!-- Left Column: Kinetic Editorial Typography (7 Cols) -->
+      <div class="lg:col-span-7 p-6 sm:p-10 md:p-14 lg:swiss-border-r flex flex-col justify-between">
+        <div>
+          <!-- KEPT: Clean Eyebrow Tag ("Video Editor · Motion & Graphic Designer") -->
+          <div class="reveal-up inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full swiss-border bg-[var(--bg-secondary)]/60 mb-7 text-xs font-mono uppercase tracking-wider" style="--stagger-delay: 40ms;">
+            <span class="px-2 py-0.5 bg-vermilion text-paper rounded text-[10px] font-bold">REEL '26</span>
+            <span class="font-semibold">Video Editor · Motion & Graphic Designer</span>
+          </div>
+
+          <!-- Dramatic Headline -->
+          <h1 class="reveal-up font-display font-extrabold text-4xl sm:text-6xl xl:text-[66px] leading-[0.96] tracking-tight uppercase mb-6" style="--stagger-delay: 120ms;">
+            IDEAS ARE <span class="font-serif italic font-normal lowercase text-vermilion px-1">easy.</span><br />
+            MAKING THEM <span class="underline decoration-vermilion decoration-4 underline-offset-8">IMPOSSIBLE</span> TO IGNORE ISN’T.
+          </h1>
+
+          <!-- Subheadline -->
+          <p class="reveal-up text-base sm:text-lg md:text-xl leading-relaxed opacity-85 max-w-2xl mb-8 font-normal" style="--stagger-delay: 200ms;">
+            Hi, I’m <strong class="font-semibold underline decoration-vermilion/60">Gourav</strong> (Founder of <strong class="font-semibold">Editrify</strong>). Video editing, motion & graphic design for brands, creators and businesses. Strip away what doesn't matter—turn raw footage into work people actually want to watch.
+          </p>
+        </div>
+
+        <!-- Interactive NLE Scrubber + CTAs -->
+        <div class="space-y-6 pt-4 swiss-border-t">
+          <!-- Mini Interactive NLE Playhead Scrubber -->
+          <div class="reveal-up p-3.5 rounded-lg swiss-border bg-[var(--bg-secondary)]/60" style="--stagger-delay: 280ms;">
+            <div class="flex items-center justify-between text-[11px] font-mono uppercase mb-2">
+              <span class="flex items-center gap-1.5 text-vermilion font-semibold">
+                <i class="ph-fill ph-scissors"></i> INTERACTIVE CUT SCRUBBER
+              </span>
+              <span id="scrubber-readout" class="opacity-75">STAGE 02/04: RHYTHM & RETENTION CUTTING</span>
+            </div>
+            <input 
+              id="hero-scrubber" 
+              type="range" 
+              min="1" 
+              max="100" 
+              value="42" 
+              aria-label="Scrub through Gourav's editing pipeline"
+              class="w-full accent-vermilion cursor-pointer h-1.5 bg-ink/20 rounded-lg"
+              oninput="updateHeroScrubber(this.value)"
+            />
+            <div class="flex justify-between text-[10px] font-mono opacity-60 mt-1">
+              <span>00:00 RAW INGEST</span>
+              <span>00:15 HOOK ENGINEER</span>
+              <span>00:45 MOTION & SFX</span>
+              <span>01:00 MASTER EXPORT</span>
+            </div>
+          </div>
+
+          <!-- Primary CTA Buttons -->
+          <div class="reveal-up flex flex-wrap items-center gap-4" style="--stagger-delay: 350ms;">
+            <a href="#screening-room" onclick="handleNavClick(event, '#screening-room')" class="editorial-lift px-7 py-4 bg-ink text-paper font-display font-bold text-sm sm:text-base uppercase tracking-wider rounded-full hover:bg-vermilion transition-all flex items-center gap-3 shadow-lg">
+              <i class="ph-fill ph-play-circle text-xl text-vermilion"></i>
+              <span>Enter Screening Room (15 Works)</span>
+            </a>
+            <a href="#dispatch" onclick="handleNavClick(event, '#dispatch')" class="editorial-lift px-6 py-4 swiss-border bg-[var(--bg-secondary)]/70 rounded-full font-mono text-xs sm:text-sm font-bold uppercase tracking-wider hover:bg-ink hover:text-paper transition-all flex items-center gap-2">
+              <span>Commission A Cut</span>
+              <i class="ph-bold ph-arrow-up-right"></i>
+            </a>
+          </div>
+
+          <!-- Quick Proof Counters + Real Software Icons Row -->
+          <div class="reveal-up grid grid-cols-3 gap-4 pt-4 swiss-border-t font-mono items-center" style="--stagger-delay: 420ms;">
+            <div>
+              <span class="text-2xl sm:text-3xl font-display font-extrabold text-vermilion block">3+ YRS</span>
+              <span class="text-[11px] uppercase opacity-70">Production Experience</span>
+            </div>
+            <div>
+              <span class="text-2xl sm:text-3xl font-display font-extrabold block">15+</span>
+              <span class="text-[11px] uppercase opacity-70">Curated Master Cuts</span>
+            </div>
+            <div class="flex flex-col gap-1.5">
+              <div class="flex items-center gap-1.5">
+                <svg class="w-6 h-6 rounded shadow"><use href="#logo-premiere"></use></svg>
+                <svg class="w-6 h-6 rounded shadow"><use href="#logo-aftereffects"></use></svg>
+                <svg class="w-6 h-6 rounded shadow"><use href="#logo-photoshop"></use></svg>
+                <svg class="w-6 h-6 rounded shadow"><use href="#logo-illustrator"></use></svg>
+              </div>
+              <span class="text-[10px] uppercase opacity-70">Official Adobe Master Suite</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Clean Studio Viewfinder Frame (Interactive 3D Tilt on Mousemove) -->
+      <div class="lg:col-span-5 p-6 sm:p-10 flex flex-col justify-center bg-[var(--bg-secondary)]/40 relative">
+        
+        <!-- 35mm Contact Sheet Frame with Real Gourav Portrait Isolated on Plain Off-White Studio Backdrop -->
+        <div id="hero-viewfinder-card" onmousemove="handleViewfinderTilt(event, this)" onmouseleave="resetViewfinderTilt(this)" class="reveal-scale corner-mark swiss-border rounded-xl p-3 bg-ink text-paper relative group overflow-hidden shadow-2xl my-auto transition-transform duration-300 ease-out" style="--stagger-delay: 180ms;">
+          <!-- Studio Pose & Backdrop Switcher inside Frame Header -->
+          <div class="flex items-center justify-between text-[10px] font-mono text-paper/70 pb-2 mb-2 border-b border-paper/15">
+            <span>GOURAV // FOUNDER OF EDITRIFY</span>
+            <div class="flex items-center gap-1">
+              <button type="button" onclick="setHeroStudioPose('offwhite')" id="pose-btn-offwhite" class="px-2 py-0.5 rounded bg-vermilion text-paper font-bold">01 Off-White</button>
+              <button type="button" onclick="setHeroStudioPose('carbon')" id="pose-btn-carbon" class="px-2 py-0.5 rounded bg-paper/10 hover:bg-paper/20">02 Carbon</button>
+              <button type="button" onclick="setHeroStudioPose('closeup')" id="pose-btn-closeup" class="px-2 py-0.5 rounded bg-paper/10 hover:bg-paper/20">03 85mm</button>
+            </div>
+          </div>
+
+          <!-- Plain Studio Backdrop Container -->
+          <div id="hero-studio-stage" class="relative rounded-lg overflow-hidden bg-[#E6DEC8] aspect-[4/4.3] flex items-end justify-center transition-colors duration-500">
+            <!-- Solid Plain Studio Keylight Circle -->
+            <div id="hero-studio-circle" class="w-64 h-64 rounded-full bg-[#D8CEB8] absolute top-10 pointer-events-none transition-colors duration-500"></div>
+
+            <!-- Real Gourav Portrait Cutout (Isolated from background) -->
+            <img 
+              id="hero-studio-img"
+              src="gorav-profile_3.jpg" 
+              alt="Gourav — Video Editor & Founder of Editrify"
+              onerror="this.src='https://gorv-portfolio-in.vercel.app/assets/images/about-photo.png'"
+              style="clip-path: url(#gourav-torso-cutout); transform: scale(1.04) translateY(2%);"
+              class="w-full h-full object-cover object-top relative z-10 transition-all duration-500"
+            />
+
+            <!-- Floating Project Reel Tags inside Viewfinder -->
+            <div class="absolute top-3 left-3 z-20 flex flex-col gap-1.5">
+              <span class="px-2.5 py-1 rounded bg-ink/90 backdrop-blur border border-paper/20 font-mono text-[10px] text-chartreuse flex items-center gap-1.5">
+                <i class="ph-fill ph-lightning"></i> HIGH-RETENTION 9:16
+              </span>
+              <span class="px-2.5 py-1 rounded bg-ink/90 backdrop-blur border border-paper/20 font-mono text-[10px] text-paper flex items-center gap-1.5">
+                <i class="ph-fill ph-bezier-curve text-vermilion"></i> MOTION & VFX
+              </span>
+            </div>
+
+            <div class="absolute bottom-3 right-3 z-20">
+              <a href="#screening-room" onclick="handleNavClick(event, '#screening-room')" class="editorial-lift px-3.5 py-1.5 rounded-full bg-ink text-paper font-mono text-[11px] font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-lg hover:bg-vermilion transition">
+                <i class="ph-fill ph-play text-vermilion"></i> Watch Reels
+              </a>
+            </div>
+          </div>
+
+          <!-- Bottom Live Waveform Visualizer Strip -->
+          <div class="mt-3 pt-2 border-t border-paper/15 flex items-center justify-between gap-3">
+            <span class="font-mono text-[10px] text-paper/70 whitespace-nowrap">AUDIO CH 1-2</span>
+            <div class="flex-1 flex items-center justify-between gap-0.5 h-4">
+              <span class="w-1 bg-vermilion h-2 rounded-full"></span>
+              <span class="w-1 bg-vermilion h-3.5 rounded-full"></span>
+              <span class="w-1 bg-chartreuse h-4 rounded-full"></span>
+              <span class="w-1 bg-vermilion h-2.5 rounded-full"></span>
+              <span class="w-1 bg-paper/50 h-2 rounded-full"></span>
+              <span class="w-1 bg-vermilion h-3.5 rounded-full"></span>
+              <span class="w-1 bg-chartreuse h-4 rounded-full"></span>
+              <span class="w-1 bg-vermilion h-3 rounded-full"></span>
+              <span class="w-1 bg-paper/40 h-2 rounded-full"></span>
+              <span class="w-1 bg-vermilion h-3.5 rounded-full"></span>
+              <span class="w-1 bg-vermilion h-4 rounded-full"></span>
+              <span class="w-1 bg-paper/60 h-2 rounded-full"></span>
+              <span class="w-1 bg-chartreuse h-3.5 rounded-full"></span>
+              <span class="w-1 bg-vermilion h-2.5 rounded-full"></span>
+            </div>
+            <span class="font-mono text-[10px] text-chartreuse">48kHz STEREO</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================
+       KINETIC MARQUEE DIVIDER STRIP
+  =========================================== -->
+  <div class="bg-ink text-paper py-3.5 swiss-border-b overflow-hidden select-none">
+    <div class="animate-marquee flex items-center gap-8 font-mono text-xs uppercase tracking-[0.2em]">
+      <span class="flex items-center gap-3"><i class="ph-fill ph-asterisk text-vermilion"></i> SHORT-VIDEO EDITS (9:16)</span>
+      <span class="flex items-center gap-3"><i class="ph-fill ph-asterisk text-chartreuse"></i> AD VIDEOS & COMMERCIALS</span>
+      <span class="flex items-center gap-3"><i class="ph-fill ph-asterisk text-vermilion"></i> PODCAST EDITING</span>
+      <span class="flex items-center gap-3"><i class="ph-fill ph-asterisk text-chartreuse"></i> AI CREATION</span>
+      <span class="flex items-center gap-3"><i class="ph-fill ph-asterisk text-vermilion"></i> THUMBNAIL DESIGNING</span>
+      <span class="flex items-center gap-3"><i class="ph-fill ph-asterisk text-chartreuse"></i> BRANDING & LOGO DESIGNING</span>
+      <!-- Duplicate for seamless loop -->
+      <span class="flex items-center gap-3"><i class="ph-fill ph-asterisk text-vermilion"></i> SHORT-VIDEO EDITS (9:16)</span>
+      <span class="flex items-center gap-3"><i class="ph-fill ph-asterisk text-chartreuse"></i> AD VIDEOS & COMMERCIALS</span>
+      <span class="flex items-center gap-3"><i class="ph-fill ph-asterisk text-vermilion"></i> PODCAST EDITING</span>
+      <span class="flex items-center gap-3"><i class="ph-fill ph-asterisk text-chartreuse"></i> AI CREATION</span>
+      <span class="flex items-center gap-3"><i class="ph-fill ph-asterisk text-vermilion"></i> THUMBNAIL DESIGNING</span>
+      <span class="flex items-center gap-3"><i class="ph-fill ph-asterisk text-chartreuse"></i> BRANDING & LOGO DESIGNING</span>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       PAGE SCENE 01 — THE PRODUCTION MATRIX
+       (FIXED HEADER ALIGNMENT + CLEAN TOPIC-ONLY ROWS)
+  =========================================== -->
+  <section id="disciplines" data-scene-id="disciplines" class="page-scene max-w-[1440px] mx-auto swiss-border-b">
+    <!-- Section Header: Responsive Non-Breaking Typography so "PRODUCTION" Never Splits Across Lines -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 swiss-border-b">
+      <div class="lg:col-span-5 p-6 sm:p-10 lg:swiss-border-r flex flex-col justify-between overflow-hidden">
+        <span class="reveal-up font-mono text-xs uppercase tracking-widest text-vermilion font-bold block mb-3">
+          // SECTION 01 — CAPABILITIES SPEC SHEET
+        </span>
+        <h2 class="reveal-up font-display font-extrabold text-2xl sm:text-3xl xl:text-[38px] uppercase tracking-tight leading-[1.05]" style="word-break: keep-all; overflow-wrap: normal; --stagger-delay: 80ms;">
+          <span class="block whitespace-nowrap">THE</span>
+          <span class="block whitespace-nowrap">PRODUCTION</span>
+          <span class="block whitespace-nowrap font-serif italic font-normal lowercase text-vermilion text-[1.18em]">matrix.</span>
+        </h2>
+      </div>
+      <div class="lg:col-span-7 p-6 sm:p-10 flex flex-col sm:flex-row sm:items-end justify-between gap-6">
+        <p class="reveal-up text-base sm:text-lg opacity-80 max-w-xl leading-relaxed" style="--stagger-delay: 140ms;">
+          Nine specialized post-production and design tracks engineered to capture attention in the first 1.5 seconds and hold retention till the final frame. Hover or tap any topic below to inspect technical deliverables.
+        </p>
+        <div class="reveal-up font-mono text-xs px-3.5 py-2 swiss-border rounded self-start sm:self-end whitespace-nowrap shrink-0" style="--stagger-delay: 200ms;">
+          INDEX: <strong class="text-vermilion">01 / 09</strong> TRACKS
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive 2-Column Swiss Spec Sheet (Left: Clean Topic Names Only, Right: Live Inspector) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12">
+      
+      <!-- Left 7 Cols: 9 Clean Topic-Only Rows (No cluttered descriptions under topics) -->
+      <div id="discipline-list" class="lg:col-span-7 lg:swiss-border-r divide-y divide-[var(--border-hairline)]">
+        <!-- Populated dynamically via JS with ONLY Topic Names + Staggered Scroll Reveal -->
+      </div>
+
+      <!-- Right 5 Cols: Sticky Technical Track Inspector Card -->
+      <div class="lg:col-span-5 p-6 sm:p-10 bg-[var(--bg-secondary)]/50 flex flex-col justify-between">
+        <div class="sticky top-24 space-y-6 reveal-scale" style="--stagger-delay: 180ms;">
+          <div class="flex items-center justify-between font-mono text-xs swiss-border-b pb-3">
+            <span class="text-vermilion font-bold flex items-center gap-1.5">
+              <i class="ph-fill ph-sliders"></i> TRACK INSPECTOR
+            </span>
+            <span id="inspector-id" class="px-2.5 py-0.5 bg-ink text-paper rounded">TRACK 01 / 09</span>
+          </div>
+
+          <!-- Dynamic Visual Preview Box with Smooth Crossfade Wrapper -->
+          <div class="p-6 rounded-xl bg-ink text-paper swiss-border relative overflow-hidden shadow-xl">
+            <div id="inspector-card-inner">
+              <div class="flex items-center justify-between font-mono text-[11px] text-paper/60 mb-4">
+                <span id="inspector-aspect">ASPECT: 9:16 VERTICAL</span>
+                <span id="inspector-fps" class="text-chartreuse">60 FPS MASTER</span>
+              </div>
+              <div class="my-4 flex items-center justify-center h-28 rounded-lg border border-paper/15 bg-inkSoft/60 relative">
+                <i id="inspector-icon" class="ph-duotone ph-device-mobile-camera text-5xl text-vermilion"></i>
+                <span id="inspector-badge" class="absolute bottom-2 right-2 font-mono text-[10px] px-2 py-0.5 rounded bg-vermilion text-paper uppercase">High Retention</span>
+              </div>
+              <h3 id="inspector-title" class="font-display font-bold text-2xl uppercase mb-2">Short-Video Edits</h3>
+              <p id="inspector-desc" class="text-sm text-paper/80 leading-relaxed mb-5">
+                High-retention vertical pacing, rhythm cuts, dynamic captions, and sound design built for Instagram Reels, YouTube Shorts, and TikTok virality.
+              </p>
+              <div class="pt-4 border-t border-paper/15 flex flex-wrap gap-2" id="inspector-tags">
+                <span class="font-mono text-[10px] px-2.5 py-1 rounded bg-paper/10 text-paper">Rhythm Pacing</span>
+                <span class="font-mono text-[10px] px-2.5 py-1 rounded bg-paper/10 text-paper">Kinetic Captions</span>
+                <span class="font-mono text-[10px] px-2.5 py-1 rounded bg-paper/10 text-paper">SFX Layering</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Official Adobe Suite Icons inside Inspector -->
+          <div class="p-4 rounded-lg swiss-border font-mono text-xs flex items-center justify-between">
+            <span class="opacity-70">MASTERING ENGINES:</span>
+            <div class="flex items-center gap-2">
+              <svg class="w-6 h-6 rounded"><use href="#logo-premiere"></use></svg>
+              <svg class="w-6 h-6 rounded"><use href="#logo-aftereffects"></use></svg>
+              <svg class="w-6 h-6 rounded"><use href="#logo-photoshop"></use></svg>
+              <svg class="w-6 h-6 rounded"><use href="#logo-illustrator"></use></svg>
+            </div>
+          </div>
+
+          <a href="#dispatch" onclick="selectBriefServiceFromInspector(event)" class="editorial-lift w-full py-4 px-5 bg-ink text-paper font-mono text-xs font-bold uppercase tracking-wider rounded-full flex items-center justify-center gap-2 hover:bg-vermilion transition shadow-lg">
+            <span>Book This Track in Brief Builder</span>
+            <i class="ph-bold ph-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================
+       PAGE SCENE 02 — THE SCREENING ROOM (ALL 15 REAL PROJECTS)
+  =========================================== -->
+  <section id="screening-room" data-scene-id="screening-room" class="page-scene bg-ink text-paper swiss-border-b transition-colors">
+    <div class="max-w-[1440px] mx-auto">
+      
+      <!-- Screening Room Header -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 border-b border-paper/15">
+        <div class="lg:col-span-6 p-6 sm:p-10 lg:border-r border-paper/15">
+          <div class="reveal-up inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-chartreuse mb-3">
+            <span class="w-2 h-2 rounded-full bg-vermilion animate-ping"></span>
+            <span>// SECTION 02 — ARCHIVE CONTACT SHEET & SCREENING ROOM</span>
+          </div>
+          <h2 class="reveal-up font-display font-extrabold text-3xl sm:text-5xl md:text-6xl uppercase tracking-tight leading-[0.95]" style="--stagger-delay: 80ms;">
+            SELECTED <span class="font-serif italic font-normal lowercase text-vermilion">cuts</span> & VISUAL ARCHIVE.
+          </h2>
+        </div>
+
+        <div class="lg:col-span-6 p-6 sm:p-10 flex flex-col justify-between gap-6">
+          <p class="reveal-up text-paper/80 text-sm sm:text-base leading-relaxed" style="--stagger-delay: 140ms;">
+            Every single project below loads Gourav’s live master reels, commercial ads, high-CTR YouTube thumbnails, billboards, and brand marks. <strong class="text-chartreuse font-normal">Hover any video frame for instant motion preview</strong>, or click to enter the full-screen Cinema Lightbox with sound.
+          </p>
+
+          <!-- View Mode Switcher + Filter Tabs -->
+          <div class="reveal-up flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-paper/15" style="--stagger-delay: 200ms;">
+            <div class="flex flex-wrap gap-1.5 font-mono text-xs" id="filter-tabs">
+              <button onclick="filterProjects('all')" data-filter="all" class="filter-btn px-3 py-1.5 rounded bg-vermilion text-paper font-bold uppercase transition">
+                All [15]
+              </button>
+              <button onclick="filterProjects('video')" data-filter="video" class="filter-btn px-3 py-1.5 rounded bg-paper/10 text-paper/80 hover:bg-paper/20 uppercase transition">
+                Video & Reels [9]
+              </button>
+              <button onclick="filterProjects('graphics')" data-filter="graphics" class="filter-btn px-3 py-1.5 rounded bg-paper/10 text-paper/80 hover:bg-paper/20 uppercase transition">
+                Thumbnails & Posters [4]
+              </button>
+              <button onclick="filterProjects('logos')" data-filter="logos" class="filter-btn px-3 py-1.5 rounded bg-paper/10 text-paper/80 hover:bg-paper/20 uppercase transition">
+                Logos & Brand [2]
+              </button>
+            </div>
+
+            <div class="inline-flex rounded border border-paper/20 p-0.5 font-mono text-[11px]">
+              <button id="view-grid-btn" onclick="setPortfolioView('grid')" class="px-3 py-1 rounded bg-paper text-ink font-bold flex items-center gap-1.5 transition">
+                <i class="ph-bold ph-grid-four"></i> Filmstrip
+              </button>
+              <button id="view-table-btn" onclick="setPortfolioView('table')" class="px-3 py-1 rounded text-paper/70 hover:text-paper flex items-center gap-1.5 transition">
+                <i class="ph-bold ph-list-numbers"></i> NLE Index
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 1: FILMSTRIP CONTACT SHEET GRID -->
+      <div id="portfolio-grid-view" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6 sm:p-10">
+        <!-- Populated dynamically with all 15 real projects + 3D Scroll Reveal -->
+      </div>
+
+      <!-- VIEW 2: NLE TIMELINE / INDEX TABLE VIEW -->
+      <div id="portfolio-table-view" class="hidden divide-y divide-paper/15">
+        <!-- Populated dynamically with all 15 real projects -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================
+       PAGE SCENE 03 — DIRECTOR'S DOSSIER & REAL ADOBE LOGOS
+  =========================================== -->
+  <section id="dossier" data-scene-id="dossier" class="page-scene max-w-[1440px] mx-auto swiss-border-b">
+    <div class="grid grid-cols-1 lg:grid-cols-12">
+      
+      <!-- Left 5 Cols: Editorial Dual-Frame Portrait Spread (Plain Studio Backdrops) -->
+      <div class="lg:col-span-5 p-6 sm:p-10 lg:swiss-border-r flex flex-col justify-between bg-[var(--bg-secondary)]/40">
+        <div class="reveal-up flex items-center justify-between font-mono text-xs mb-6">
+          <span class="text-vermilion font-bold">// SECTION 03 — DIRECTOR'S DOSSIER</span>
+          <span class="px-2 py-0.5 swiss-border rounded">REF: GRV-03Y</span>
+        </div>
+
+        <!-- Studio Portrait Composite with Plain Background & Distinct Framing -->
+        <div class="reveal-scale relative my-auto py-4" style="--stagger-delay: 120ms;">
+          <div class="corner-mark swiss-border rounded-xl p-3 bg-ink text-paper shadow-xl max-w-md mx-auto">
+            <div class="flex justify-between font-mono text-[10px] text-paper/60 mb-2">
+              <span>PORTRAIT ARCHIVE // 85MM CROP</span>
+              <span>GOURAV · FOUNDER</span>
+            </div>
+            <!-- Plain Matte Charcoal Studio Backdrop with Vermilion Keylight Circle -->
+            <div class="rounded-lg overflow-hidden aspect-[4/4.5] bg-[#181615] relative flex items-end justify-center">
+              <div class="w-56 h-56 rounded-full bg-vermilion/85 absolute top-12 pointer-events-none"></div>
+              <img 
+                src="gorav-profile_3.jpg" 
+                alt="Gourav Portrait"
+                onerror="this.src='https://gorv-portfolio-in.vercel.app/assets/images/about-photo.png'"
+                style="clip-path: url(#gourav-head-cutout); transform: scaleX(-1) scale(1.32) translateY(12%);"
+                class="w-full h-full object-cover object-top relative z-10 contrast-110"
+              />
+            </div>
+            <div class="mt-2 pt-2 border-t border-paper/15 flex justify-between font-mono text-[10px] text-chartreuse">
+              <span>LOCATION: INDIA · WORLDWIDE</span>
+              <span>EXP: 3+ YEARS</span>
+            </div>
+          </div>
+
+          <!-- Floating Official Editrify Agency Stamp -->
+          <div class="mt-4 sm:mt-0 sm:absolute sm:-bottom-2 sm:-right-2 w-40 p-3 rounded-xl bg-paper text-ink swiss-border shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-300">
+            <div class="flex items-center gap-2.5 mb-2">
+              <svg class="w-10 h-10 rounded-lg shrink-0"><use href="#logo-editrify"></use></svg>
+              <div class="font-mono text-[10px] leading-tight">
+                <span class="font-bold block text-xs">EDITRIFY</span>
+                <span class="text-vermilion font-semibold">FOUNDER</span>
+              </div>
+            </div>
+            <div class="font-mono text-[9px] uppercase tracking-wider px-2 py-0.5 bg-ink text-paper rounded text-center">
+              VERIFIED STUDIO
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal-up font-mono text-xs opacity-75 pt-8" style="--stagger-delay: 220ms;">
+          "Understand what the content needs to achieve, remove what doesn’t matter, and turn the idea into something people actually want to watch."
+        </div>
+      </div>
+
+      <!-- Right 7 Cols: Editorial Story, Editrify Agency Card & Official Adobe Suite Logos -->
+      <div class="lg:col-span-7 p-6 sm:p-10 md:p-14 flex flex-col justify-between space-y-10">
+        
+        <div>
+          <span class="reveal-up font-mono text-xs uppercase tracking-widest text-vermilion font-bold block mb-3">
+            THE PHILOSOPHY BEHIND THE TIMELINE
+          </span>
+          <h2 class="reveal-up font-display font-extrabold text-3xl sm:text-5xl uppercase tracking-tight leading-[1.02] mb-6" style="--stagger-delay: 80ms;">
+            HI, I’M GOURAV — <span class="font-serif italic font-normal lowercase text-vermilion">made to stand out</span> IS THE WHOLE POINT.
+          </h2>
+          <div class="reveal-up space-y-4 text-base sm:text-lg opacity-85 leading-relaxed" style="--stagger-delay: 150ms;">
+            <p>
+              With over <strong class="font-semibold">3+ years of hands-on professional experience</strong> across high-retention video editing, social content, commercial advertising, multi-cam podcasts, YouTube storytelling, and brand identity design, my approach is ruthlessly simple:
+            </p>
+            <blockquote class="p-5 rounded-xl swiss-border bg-[var(--bg-secondary)]/60 font-serif italic text-2xl sm:text-3xl leading-snug text-vermilion">
+              “Understand what the content needs to achieve, remove what doesn’t matter, and turn the idea into something people actually want to watch.”
+            </blockquote>
+          </div>
+        </div>
+
+        <!-- Editrify Agency Feature Callout with Real Editrify & Instagram Logos -->
+        <div class="reveal-up p-6 sm:p-8 rounded-2xl bg-ink text-paper swiss-border relative overflow-hidden" style="--stagger-delay: 220ms;">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-paper/15">
+            <div class="flex items-center gap-3.5">
+              <svg class="w-12 h-12 rounded-xl shrink-0 border border-paper/15"><use href="#logo-editrify"></use></svg>
+              <div>
+                <span class="font-mono text-[10px] uppercase tracking-widest px-2 py-0.5 rounded bg-vermilion text-paper font-bold inline-block mb-1">
+                  CREATIVE MEDIA AGENCY
+                </span>
+                <h3 class="font-display font-extrabold text-2xl sm:text-3xl uppercase tracking-tight">
+                  FOUNDER OF EDITRIFY
+                </h3>
+              </div>
+            </div>
+            <a href="https://instagram.com/_editrify_" target="_blank" rel="noopener noreferrer" class="editorial-lift px-4 py-2.5 rounded-full bg-paper text-ink hover:bg-chartreuse text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-2 self-start sm:self-center transition shadow-lg">
+              <svg class="w-5 h-5 shrink-0"><use href="#logo-instagram"></use></svg>
+              <span>@_editrify_</span>
+              <i class="ph-bold ph-arrow-up-right"></i>
+            </a>
+          </div>
+          <p class="mt-4 text-sm sm:text-base text-paper/80 leading-relaxed">
+            Alongside independent direction, I founded <strong class="text-chartreuse">Editrify</strong>—a creative media studio focused on helping brands, founders, and creators communicate through sharper visuals, scroll-stopping motion, and cohesive design systems worldwide.
+          </p>
+        </div>
+
+        <!-- Post-Production Software Suite with Real Official SVG Logos + Scroll-Animated Bars -->
+        <div id="adobe-skills-section" class="reveal-up" style="--stagger-delay: 280ms;">
+          <div class="flex items-center justify-between font-mono text-xs uppercase tracking-wider mb-4">
+            <span class="font-bold">POST-PRODUCTION PIPELINE & MASTERING SUITE</span>
+            <span class="text-vermilion">OFFICIAL ADOBE CREATIVE CLOUD</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- Adobe Premiere Pro -->
+            <div class="editorial-lift p-4 rounded-xl swiss-border bg-[var(--bg-secondary)]/40 hover:border-vermilion transition">
+              <div class="flex items-center justify-between mb-2.5">
+                <span class="font-display font-bold text-base flex items-center gap-3">
+                  <svg class="w-9 h-9 rounded-lg shadow-md shrink-0"><use href="#logo-premiere"></use></svg>
+                  <span>Adobe Premiere Pro</span>
+                </span>
+                <span class="font-mono text-xs text-vermilion font-bold">98%</span>
+              </div>
+              <div class="w-full h-1.5 bg-ink/15 rounded-full overflow-hidden mb-2">
+                <div class="skill-bar-fill h-full bg-vermilion" data-width="98%"></div>
+              </div>
+              <span class="font-mono text-[11px] opacity-75 block">Narrative Assembly, Rhythm Cutting, Multi-Cam & SFX</span>
+            </div>
+
+            <!-- Adobe After Effects -->
+            <div class="editorial-lift p-4 rounded-xl swiss-border bg-[var(--bg-secondary)]/40 hover:border-vermilion transition">
+              <div class="flex items-center justify-between mb-2.5">
+                <span class="font-display font-bold text-base flex items-center gap-3">
+                  <svg class="w-9 h-9 rounded-lg shadow-md shrink-0"><use href="#logo-aftereffects"></use></svg>
+                  <span>Adobe After Effects</span>
+                </span>
+                <span class="font-mono text-xs text-vermilion font-bold">94%</span>
+              </div>
+              <div class="w-full h-1.5 bg-ink/15 rounded-full overflow-hidden mb-2">
+                <div class="skill-bar-fill h-full bg-vermilion" data-width="94%"></div>
+              </div>
+              <span class="font-mono text-[11px] opacity-75 block">Kinetic Typography, Compositing, VFX & Motion Systems</span>
+            </div>
+
+            <!-- Adobe Photoshop -->
+            <div class="editorial-lift p-4 rounded-xl swiss-border bg-[var(--bg-secondary)]/40 hover:border-vermilion transition">
+              <div class="flex items-center justify-between mb-2.5">
+                <span class="font-display font-bold text-base flex items-center gap-3">
+                  <svg class="w-9 h-9 rounded-lg shadow-md shrink-0"><use href="#logo-photoshop"></use></svg>
+                  <span>Adobe Photoshop</span>
+                </span>
+                <span class="font-mono text-xs text-vermilion font-bold">95%</span>
+              </div>
+              <div class="w-full h-1.5 bg-ink/15 rounded-full overflow-hidden mb-2">
+                <div class="skill-bar-fill h-full bg-vermilion" data-width="95%"></div>
+              </div>
+              <span class="font-mono text-[11px] opacity-75 block">High-CTR YouTube Thumbnails, Posters & Retouching</span>
+            </div>
+
+            <!-- Adobe Illustrator -->
+            <div class="editorial-lift p-4 rounded-xl swiss-border bg-[var(--bg-secondary)]/40 hover:border-vermilion transition">
+              <div class="flex items-center justify-between mb-2.5">
+                <span class="font-display font-bold text-base flex items-center gap-3">
+                  <svg class="w-9 h-9 rounded-lg shadow-md shrink-0"><use href="#logo-illustrator"></use></svg>
+                  <span>Adobe Illustrator</span>
+                </span>
+                <span class="font-mono text-xs text-vermilion font-bold">92%</span>
+              </div>
+              <div class="w-full h-1.5 bg-ink/15 rounded-full overflow-hidden mb-2">
+                <div class="skill-bar-fill h-full bg-vermilion" data-width="92%"></div>
+              </div>
+              <span class="font-mono text-[11px] opacity-75 block">Scalable Vector Logos, Brand Marks & Typography</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       PAGE SCENE 04 — DIRECT DISPATCH WITH REAL BRAND LOGOS
+       & CLEAN SWISS-EDITORIAL MAGNETIC HOVER CARDS
+  =========================================== -->
+  <section id="dispatch" data-scene-id="dispatch" class="page-scene max-w-[1440px] mx-auto swiss-border-b">
+    <div class="grid grid-cols-1 lg:grid-cols-12">
+      
+      <!-- Left 6 Cols: Direct Dispatch Channels -->
+      <div class="lg:col-span-6 p-6 sm:p-10 md:p-12 lg:swiss-border-r flex flex-col justify-between gap-8">
+        <div>
+          <div class="reveal-up inline-flex items-center gap-2 px-3 py-1 rounded-full swiss-border font-mono text-xs uppercase mb-5">
+            <span>🌍 WORKING WORLDWIDE</span>
+            <span class="text-vermilion font-bold">· DIRECT DISPATCH</span>
+          </div>
+
+          <h2 class="reveal-up font-display font-extrabold text-2xl sm:text-4xl xl:text-[42px] uppercase tracking-tight leading-[1.08] max-w-xl mb-4" style="word-break: keep-all; overflow-wrap: normal; --stagger-delay: 80ms;">
+            GOT FOOTAGE OR AN IDEA?<br />
+            LET’S <span class="font-serif italic font-normal lowercase text-vermilion text-[1.12em]">edit it</span> INTO<br />
+            SOMETHING WORTH SHARING.
+          </h2>
+
+          <p class="reveal-up text-sm sm:text-base opacity-80 leading-relaxed max-w-xl" style="--stagger-delay: 140ms;">
+            Skip the slow agency bottlenecks. Reach out directly via WhatsApp, Gmail, Phone, or Instagram—or use the interactive Cut Brief Builder on the right to launch a structured project brief in seconds.
+          </p>
+        </div>
+
+        <!-- Direct Contact Cards with Authentic Logos & Clean Tactile Hover Lift -->
+        <div class="space-y-3.5 font-mono">
+          
+          <!-- WhatsApp Direct Card -->
+          <a href="https://wa.me/916239205320" target="_blank" rel="noopener noreferrer" class="reveal-up editorial-lift p-4 rounded-2xl swiss-border bg-[var(--bg-secondary)]/60 hover:border-vermilion hover:bg-ink hover:text-paper flex items-center justify-between group transition-all" style="--stagger-delay: 180ms;">
+            <div class="flex items-center gap-3.5">
+              <svg class="w-11 h-11 rounded-xl shrink-0 shadow-md"><use href="#logo-whatsapp"></use></svg>
+              <div>
+                <span class="text-[10px] uppercase opacity-60 block">WHATSAPP INSTANT DISPATCH</span>
+                <span class="font-bold text-sm sm:text-base group-hover:text-chartreuse transition">+91 62392 05320</span>
+              </div>
+            </div>
+            <span class="px-4 py-2 rounded-full bg-ink text-paper group-hover:bg-vermilion text-xs font-bold uppercase flex items-center gap-1.5 transition">
+              Chat on WhatsApp <i class="ph-bold ph-arrow-up-right group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+            </span>
+          </a>
+
+          <!-- Instagram Direct Card -->
+          <a href="https://instagram.com/_editrify_" target="_blank" rel="noopener noreferrer" class="reveal-up editorial-lift p-4 rounded-2xl swiss-border bg-[var(--bg-secondary)]/60 hover:border-vermilion hover:bg-ink hover:text-paper flex items-center justify-between group transition-all" style="--stagger-delay: 240ms;">
+            <div class="flex items-center gap-3.5">
+              <svg class="w-11 h-11 rounded-xl shrink-0 shadow-md"><use href="#logo-instagram"></use></svg>
+              <div>
+                <span class="text-[10px] uppercase opacity-60 block">INSTAGRAM REELS & DM</span>
+                <span class="font-bold text-sm sm:text-base group-hover:text-chartreuse transition">@_editrify_</span>
+              </div>
+            </div>
+            <span class="px-4 py-2 rounded-full bg-ink text-paper group-hover:bg-vermilion text-xs font-bold uppercase flex items-center gap-1.5 transition">
+              Open Instagram <i class="ph-bold ph-arrow-up-right group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+            </span>
+          </a>
+
+          <!-- Gmail / Electronic Mail Row -->
+          <div class="reveal-up editorial-lift p-4 rounded-2xl swiss-border bg-[var(--bg-secondary)]/60 hover:border-vermilion hover:bg-ink hover:text-paper flex flex-wrap items-center justify-between gap-3 group transition-all" style="--stagger-delay: 300ms;">
+            <a href="mailto:editrify.in@gmail.com" class="flex items-center gap-3.5">
+              <svg class="w-11 h-11 rounded-xl shrink-0 shadow-md"><use href="#logo-gmail"></use></svg>
+              <div>
+                <span class="text-[10px] uppercase opacity-60 block">OFFICIAL GMAIL DISPATCH</span>
+                <span class="font-bold text-sm sm:text-base group-hover:text-chartreuse transition">editrify.in@gmail.com</span>
+              </div>
+            </a>
+            <button onclick="copyEmailAddress()" class="px-4 py-2 rounded-full bg-ink text-paper group-hover:bg-vermilion text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 transition">
+              <i class="ph-bold ph-copy"></i>
+              <span id="copy-email-label">Copy Email</span>
+            </button>
+          </div>
+
+          <!-- Phone Call Direct (Official Glossy Phone Call App SVG Logo) -->
+          <a href="tel:+916239205320" class="reveal-up editorial-lift p-4 rounded-2xl swiss-border bg-[var(--bg-secondary)]/60 hover:border-vermilion hover:bg-ink hover:text-paper flex items-center justify-between group transition-all" style="--stagger-delay: 360ms;">
+            <div class="flex items-center gap-3.5">
+              <svg class="w-11 h-11 rounded-xl shrink-0 shadow-md"><use href="#logo-phone"></use></svg>
+              <div>
+                <span class="text-[10px] uppercase opacity-60 block">DIRECT STUDIO LINE</span>
+                <span class="font-bold text-sm sm:text-base group-hover:text-chartreuse transition">+91 62392 05320</span>
+              </div>
+            </div>
+            <span class="px-4 py-2 rounded-full bg-ink text-paper group-hover:bg-vermilion text-xs font-bold uppercase flex items-center gap-1.5 transition">
+              Call Line <i class="ph-bold ph-arrow-up-right group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
+            </span>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- Right 6 Cols: Interactive "Build Your Cut Brief" Configurator -->
+      <div class="lg:col-span-6 p-6 sm:p-10 md:p-14 bg-[var(--bg-secondary)]/40 flex flex-col justify-between">
+        <div class="reveal-scale p-6 sm:p-8 rounded-2xl swiss-border bg-[var(--bg-primary)] shadow-xl space-y-6" style="--stagger-delay: 160ms;">
+          <div class="flex items-center justify-between font-mono text-xs swiss-border-b pb-4">
+            <span class="text-vermilion font-bold flex items-center gap-2">
+              <i class="ph-fill ph-sliders-horizontal"></i> BUILD YOUR CUT BRIEF
+            </span>
+            <span class="opacity-60">EST. TIME: 30 SEC</span>
+          </div>
+
+          <!-- Step 1: Select Track / Deliverable -->
+          <div>
+            <label class="block font-mono text-xs uppercase tracking-wider mb-3 font-semibold">
+              01. SELECT PRIMARY DELIVERABLE TRACK(S):
+            </label>
+            <div class="flex flex-wrap gap-2" id="brief-service-pills">
+              <button type="button" onclick="toggleBriefPill(this, 'Short-Video Edits')" class="brief-pill px-3.5 py-2 rounded-lg font-mono text-xs bg-vermilion text-paper font-bold transition">
+                ✓ Short-Video Edits
+              </button>
+              <button type="button" onclick="toggleBriefPill(this, 'Ad Videos')" class="brief-pill px-3.5 py-2 rounded-lg font-mono text-xs swiss-border hover:border-vermilion transition">
+                Ad Videos
+              </button>
+              <button type="button" onclick="toggleBriefPill(this, 'Branding & Logo Designing')" class="brief-pill px-3.5 py-2 rounded-lg font-mono text-xs swiss-border hover:border-vermilion transition">
+                Branding & Logo Designing
+              </button>
+              <button type="button" onclick="toggleBriefPill(this, 'Podcast Editing')" class="brief-pill px-3.5 py-2 rounded-lg font-mono text-xs swiss-border hover:border-vermilion transition">
+                Podcast Editing
+              </button>
+              <button type="button" onclick="toggleBriefPill(this, 'Thumbnail Designing')" class="brief-pill px-3.5 py-2 rounded-lg font-mono text-xs swiss-border hover:border-vermilion transition">
+                Thumbnail Designing
+              </button>
+              <button type="button" onclick="toggleBriefPill(this, 'AI Creation')" class="brief-pill px-3.5 py-2 rounded-lg font-mono text-xs swiss-border hover:border-vermilion transition">
+                AI Creation
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 2: Project Cadence -->
+          <div>
+            <label class="block font-mono text-xs uppercase tracking-wider mb-3 font-semibold">
+              02. PRODUCTION CADENCE / VOLUME:
+            </label>
+            <div class="grid grid-cols-3 gap-2 font-mono text-xs" id="brief-cadence-group">
+              <button type="button" onclick="setBriefCadence(this, 'Single Hero Project')" class="cadence-btn py-2.5 px-3 rounded-lg bg-ink text-paper font-bold transition">
+                Single Hero Cut
+              </button>
+              <button type="button" onclick="setBriefCadence(this, 'Monthly Retainer Pack')" class="cadence-btn py-2.5 px-3 rounded-lg swiss-border hover:border-vermilion transition">
+                Monthly Retainer
+              </button>
+              <button type="button" onclick="setBriefCadence(this, 'Full Campaign Launch')" class="cadence-btn py-2.5 px-3 rounded-lg swiss-border hover:border-vermilion transition">
+                Full Campaign
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 3: Name & Project Notes -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="brief-name" class="block font-mono text-[11px] uppercase opacity-75 mb-1">Your Name / Brand</label>
+              <input id="brief-name" type="text" placeholder="e.g. Alex from Apex Brand" oninput="updateBriefPreview()" class="w-full px-3.5 py-2.5 rounded-lg swiss-border bg-transparent text-sm focus:outline-none focus:border-vermilion" />
+            </div>
+            <div>
+              <label for="brief-link" class="block font-mono text-[11px] uppercase opacity-75 mb-1">Raw Footage / Reference Link (Optional)</label>
+              <input id="brief-link" type="text" placeholder="Drive, Frame.io, or IG link" oninput="updateBriefPreview()" class="w-full px-3.5 py-2.5 rounded-lg swiss-border bg-transparent text-sm focus:outline-none focus:border-vermilion" />
+            </div>
+          </div>
+
+          <div>
+            <label for="brief-notes" class="block font-mono text-[11px] uppercase opacity-75 mb-1">Project Goal or Vision</label>
+            <textarea id="brief-notes" rows="2" placeholder="Tell Gourav what you want to achieve with this edit or design..." oninput="updateBriefPreview()" class="w-full px-3.5 py-2 rounded-lg swiss-border bg-transparent text-sm focus:outline-none focus:border-vermilion"></textarea>
+          </div>
+
+          <!-- Live Generated Teleprinter Preview -->
+          <div class="p-3.5 rounded-lg bg-ink text-paper font-mono text-xs">
+            <span class="text-[10px] text-chartreuse uppercase block mb-1">// AUTO-GENERATED DISPATCH SCRIPT:</span>
+            <p id="brief-preview-text" class="text-paper/85 leading-relaxed text-[11px]"></p>
+          </div>
+
+          <!-- Dispatch Action Buttons -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+            <button type="button" onclick="sendBriefViaWhatsApp()" class="editorial-lift py-4 px-5 rounded-full bg-ink text-paper font-display font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2.5 hover:bg-vermilion shadow-xl transition">
+              <svg class="w-5 h-5 shrink-0"><use href="#logo-whatsapp"></use></svg>
+              <span>Send Brief on WhatsApp</span>
+            </button>
+            <button type="button" onclick="sendBriefViaEmail()" class="editorial-lift py-4 px-5 rounded-full bg-ink text-paper font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2.5 hover:bg-vermilion shadow-xl transition">
+              <svg class="w-5 h-5 shrink-0"><use href="#logo-gmail"></use></svg>
+              <span>Launch Gmail Draft</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================
+       DARKROOM COLOPHON FOOTER
+  =========================================== -->
+  <footer class="bg-ink text-paper">
+    <div class="max-w-[1440px] mx-auto px-6 sm:px-10 py-12">
+      <div class="reveal-up flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-8 border-b border-paper/15">
+        <div class="flex items-center gap-4">
+          <svg class="w-12 h-12 rounded-xl border border-paper/15 shrink-0"><use href="#logo-editrify"></use></svg>
+          <div>
+            <span class="font-mono text-xs text-vermilion uppercase tracking-widest block mb-1">END OF REEL // COLOPHON</span>
+            <h3 class="font-display font-extrabold text-2xl sm:text-4xl tracking-tight">GOURAV · EDITRIFY STUDIO</h3>
+          </div>
+        </div>
+        <div class="flex flex-wrap items-center gap-3 font-mono text-xs">
+          <a href="#top" onclick="handleNavClick(event, '#top')" class="editorial-lift px-4 py-2.5 rounded-full border border-paper/20 hover:border-vermilion transition">↑ TOP TIMECODE</a>
+          <a href="https://wa.me/916239205320" target="_blank" rel="noopener noreferrer" class="editorial-lift px-5 py-2.5 rounded-full bg-vermilion text-paper font-bold flex items-center gap-2">
+            <svg class="w-4 h-4"><use href="#logo-whatsapp"></use></svg>
+            <span>WHATSAPP DIRECT</span>
+          </a>
+          <a href="tel:+916239205320" class="editorial-lift px-5 py-2.5 rounded-full bg-paper/10 hover:bg-paper/20 text-paper font-bold flex items-center gap-2">
+            <svg class="w-4 h-4"><use href="#logo-phone"></use></svg>
+            <span>CALL STUDIO</span>
+          </a>
+          <a href="https://instagram.com/_editrify_" target="_blank" rel="noopener noreferrer" class="editorial-lift px-5 py-2.5 rounded-full bg-paper/10 hover:bg-paper/20 text-paper font-bold flex items-center gap-2">
+            <svg class="w-4 h-4"><use href="#logo-instagram"></use></svg>
+            <span>INSTAGRAM</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-paper/60">
+        <span>© 2026 GOURAV (EDITRIFY). ALL MASTER CUTS & DESIGNS RESERVED.</span>
+        <span>EDITION: SWISS-ANALOG ARCHIVE // WORKING WORLDWIDE 🌍</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================
+       FULL-SCREEN CINEMA LIGHTBOX MODAL
+  =========================================== -->
+  <div id="cinema-modal" class="fixed inset-0 z-50 hidden bg-ink/95 backdrop-blur-xl flex-col justify-between p-4 sm:p-8 text-paper">
+    <div class="max-w-[1400px] w-full mx-auto flex items-center justify-between border-b border-paper/15 pb-4 font-mono text-xs">
+      <div class="flex items-center gap-3">
+        <span id="modal-index" class="px-2.5 py-1 rounded bg-vermilion text-paper font-bold">CUT 01 / 15</span>
+        <span id="modal-category" class="text-chartreuse uppercase tracking-wider">REEL EDIT</span>
+        <span class="hidden sm:inline text-paper/40">|</span>
+        <span id="modal-title-top" class="hidden sm:inline font-semibold text-paper">Why Restaurants Go Viral</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <button onclick="stepModalProject(-1)" class="px-3 py-1.5 rounded border border-paper/20 hover:border-paper flex items-center gap-1">
+          <i class="ph-bold ph-caret-left"></i> Prev
+        </button>
+        <button onclick="stepModalProject(1)" class="px-3 py-1.5 rounded border border-paper/20 hover:border-paper flex items-center gap-1">
+          Next <i class="ph-bold ph-caret-right"></i>
+        </button>
+        <button onclick="closeCinemaModal()" class="ml-2 px-3.5 py-1.5 rounded bg-vermilion text-paper font-bold flex items-center gap-1.5 hover:opacity-90">
+          <span>ESC</span> <i class="ph-bold ph-x"></i>
+        </button>
+      </div>
+    </div>
+
+    <div id="cinema-modal-stage" class="flex-1 flex items-center justify-center my-4 overflow-hidden relative max-w-[1400px] w-full mx-auto">
+      <div id="modal-video-wrap" class="hidden h-full max-h-[74vh] flex items-center justify-center relative">
+        <video id="modal-video" controls playsinline class="max-h-[74vh] max-w-full rounded-xl border border-paper/20 shadow-2xl bg-black"></video>
+      </div>
+      <div id="modal-image-wrap" class="hidden h-full max-h-[74vh] flex items-center justify-center">
+        <img id="modal-image" src="" alt="Project Artwork" class="max-h-[74vh] max-w-full object-contain rounded-xl border border-paper/20 shadow-2xl" />
+      </div>
+    </div>
+
+    <div class="max-w-[1400px] w-full mx-auto pt-4 border-t border-paper/15 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 font-mono text-xs">
+      <div>
+        <h4 id="modal-title-bottom" class="font-display font-bold text-xl text-paper">Why Restaurants Go Viral</h4>
+        <p id="modal-specs" class="text-paper/60 text-xs">MASTER DELIVERABLE · GOURAV // EDITRIFY</p>
+      </div>
+      <div id="modal-video-controls" class="flex flex-wrap items-center gap-2">
+        <button onclick="frameStepModalVideo(-1/24)" class="px-3 py-1.5 rounded bg-paper/10 hover:bg-paper/20 text-paper">-1 Frame</button>
+        <button onclick="toggleModalVideoPlay()" class="px-4 py-1.5 rounded bg-chartreuse text-ink font-bold">PAUSE / PLAY</button>
+        <button onclick="frameStepModalVideo(1/24)" class="px-3 py-1.5 rounded bg-paper/10 hover:bg-paper/20 text-paper">+1 Frame</button>
+        <button onclick="toggleModalVideoMute()" id="modal-mute-btn" class="px-3 py-1.5 rounded border border-paper/25 hover:border-chartreuse">🔊 AUDIO ON</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 px-4 py-3 rounded-xl bg-ink text-paper border border-vermilion font-mono text-xs shadow-2xl translate-y-24 opacity-0 transition-all duration-300 flex items-center gap-2.5 pointer-events-none">
+    <i class="ph-fill ph-check-circle text-chartreuse text-lg"></i>
+    <span id="toast-message">Copied to clipboard</span>
+  </div>
+
+  <!-- ==========================================
+       APPLICATION LOGIC, 60FPS SMOOTH GLIDE ENGINE & PAGE-BY-PAGE CHOREOGRAPHY
+  =========================================== -->
+  <script>
+    // 1. ALL 9 DISCIPLINES (Matrix rows show ONLY Topic Names; Inspector shows full details on hover/click)
+    const disciplinesData = [
+      {
+        id: '01',
+        title: 'Short-Video Edits',
+        aspect: '9:16 VERTICAL',
+        fps: '60 FPS MASTER',
+        badge: 'High Retention',
+        icon: 'ph-device-mobile-camera',
+        desc: 'High-retention vertical pacing, rhythm cuts & kinetic captions engineered for Instagram Reels, YouTube Shorts, and TikTok virality.',
+        tags: ['Rhythm Pacing', 'Kinetic Captions', 'SFX Layering', 'Viral Hooks']
+      },
+      {
+        id: '02',
+        title: 'Ad Videos',
+        aspect: '9:16 / 16:9',
+        fps: '24/30 FPS COMMERCIAL',
+        badge: 'ROAS Driven',
+        icon: 'ph-megaphone',
+        desc: 'Conversion-engineered commercial spots & performance hooks for D2C brands, hospitality, and education.',
+        tags: ['Product Showcases', '3-Sec Hook Architecture', 'Color Grading', 'CTA Motion']
+      },
+      {
+        id: '03',
+        title: 'Podcast Editing',
+        aspect: '16:9 + 9:16 CLIPS',
+        fps: '48kHz MASTER AUDIO',
+        badge: 'Multi-Cam Sync',
+        icon: 'ph-microphone-stage',
+        desc: 'Multi-cam sync, broadcast audio mastering, narrative tightening & viral micro-clips.',
+        tags: ['Audio Mastering', 'Multi-Cam Switching', 'B-Roll Overlays', 'Clip Extraction']
+      },
+      {
+        id: '04',
+        title: 'AI Creation',
+        aspect: 'CUSTOM HYBRID',
+        fps: 'GEN-AI + VFX',
+        badge: 'Next-Gen Workflow',
+        icon: 'ph-sparkle',
+        desc: 'Next-gen generative visuals, AI motion workflows & hybrid After Effects synthesis.',
+        tags: ['Generative Visuals', 'AI Upscaling', 'Hybrid VFX', 'Style Transfer']
+      },
+      {
+        id: '05',
+        title: 'Event Coverage',
+        aspect: '16:9 / 9:16',
+        fps: '60/120 FPS SLOW-MO',
+        badge: 'High Energy',
+        icon: 'ph-confetti',
+        desc: 'High-energy aftermovies, recap edits & beat-synced cinematic highlights.',
+        tags: ['Speed Ramping', 'Beat-Sync Cuts', 'Aftermovies', 'Crowd Energy']
+      },
+      {
+        id: '06',
+        title: 'Logo Designing',
+        aspect: 'VECTOR MASTER',
+        fps: 'CMYK + RGB',
+        badge: 'Brand Mark',
+        icon: 'ph-pen-nib',
+        desc: 'Timeless brand marks, custom monograms & scalable vector systems crafted in Adobe Illustrator.',
+        tags: ['Vector Precision', 'Custom Monograms', 'Grid Construction', 'Iconography']
+      },
+      {
+        id: '07',
+        title: 'Branding',
+        aspect: 'IDENTITY SYSTEM',
+        fps: 'FULL GUIDELINES',
+        badge: 'Visual Identity',
+        icon: 'ph-swatches',
+        desc: 'Complete visual identity systems, typography & brand worldbuilding so your business stands out.',
+        tags: ['Brand Strategy', 'Typography Systems', 'Social Key Visuals', 'Packaging']
+      },
+      {
+        id: '08',
+        title: 'Thumbnail Designing',
+        aspect: '16:9 (1920×1080)',
+        fps: 'HIGH-CTR PACKAGING',
+        badge: 'Click Magnet',
+        icon: 'ph-frame-corners',
+        desc: 'High-CTR YouTube packaging, psychological visual hooks & custom Photoshop compositing.',
+        tags: ['Subject Compositing', 'Color Contrast', 'CTR Psychology', 'Lighting FX']
+      },
+      {
+        id: '09',
+        title: 'Long-Form YouTube Videos',
+        aspect: '16:9 4K UHD',
+        fps: '24/30 FPS NARRATIVE',
+        badge: 'Retention Arc',
+        icon: 'ph-youtube-logo',
+        desc: 'Documentary-style storytelling, pacing architecture & custom motion graphics.',
+        tags: ['Story Arcs', 'Motion Explainers', 'Chapter Pacing', 'Sound Design']
+      }
+    ];
+
+    // 2. ALL 15 REAL PORTFOLIO PROJECTS
+    const portfolioProjects = [
+      { id: '01', title: 'Why Restaurants Go Viral', category: 'Reel Edit', group: 'video', type: 'video', aspect: '9:16 Vertical', duration: '00:48:12', videoUrl: 'https://gorv-portfolio-in.vercel.app/assets/videos/reel-01.mp4', posterUrl: 'https://gorv-portfolio-in.vercel.app/assets/images/reel-01-cover.jpg', tools: 'Premiere Pro · After Effects', logos: ['logo-premiere', 'logo-aftereffects'] },
+      { id: '02', title: 'Froyo — Naam Toh Suna Suna Hoga', category: 'Product Ad', group: 'video', type: 'video', aspect: '9:16 Vertical', duration: '00:36:04', videoUrl: 'https://gorv-portfolio-in.vercel.app/assets/videos/reel-02.mp4', posterUrl: 'https://gorv-portfolio-in.vercel.app/assets/images/reel-02-cover.jpg', tools: 'Premiere Pro · Motion Graphics', logos: ['logo-premiere', 'logo-aftereffects'] },
+      { id: '03', title: '"But, 1 Sec..." — Skill Reel', category: 'Reel Edit', group: 'video', type: 'video', aspect: '9:16 Vertical', duration: '00:29:18', videoUrl: 'https://gorv-portfolio-in.vercel.app/assets/videos/reel-03.mp4', posterUrl: 'https://gorv-portfolio-in.vercel.app/assets/images/reel-03-cover.jpg', tools: 'After Effects · Rhythm Cut', logos: ['logo-aftereffects', 'logo-premiere'] },
+      { id: '04', title: 'Introvert — Hospitality Reel', category: 'Reel Edit', group: 'video', type: 'video', aspect: '9:16 Vertical', duration: '00:41:09', videoUrl: 'https://gorv-portfolio-in.vercel.app/assets/videos/reel-04.mp4', posterUrl: 'https://gorv-portfolio-in.vercel.app/assets/images/reel-04-cover.jpg', tools: 'Premiere Pro · Color Grade', logos: ['logo-premiere'] },
+      { id: '05', title: 'Course Launch — NIFCI', category: 'Course Promo', group: 'video', type: 'video', aspect: '9:16 Promo', duration: '00:52:20', videoUrl: 'https://gorv-portfolio-in.vercel.app/assets/videos/reel-05.mp4', posterUrl: 'https://gorv-portfolio-in.vercel.app/assets/images/reel-05-cover.jpg', tools: 'Premiere Pro · Kinetic Type', logos: ['logo-premiere', 'logo-aftereffects'] },
+      { id: '06', title: 'Musakan Chocolate', category: 'Ad Video', group: 'video', type: 'video', aspect: '9:16 Commercial', duration: '00:34:15', videoUrl: 'https://gorv-portfolio-in.vercel.app/assets/videos/reel-06.mp4', posterUrl: 'https://gorv-portfolio-in.vercel.app/assets/images/reel-06-cover.jpg', tools: 'After Effects · Product VFX', logos: ['logo-aftereffects', 'logo-premiere'] },
+      { id: '07', title: 'Study in Australia — IIE Education', category: 'Ad Video', group: 'video', type: 'video', aspect: '9:16 Commercial', duration: '00:44:02', videoUrl: 'https://gorv-portfolio-in.vercel.app/assets/videos/reel-07.mp4', posterUrl: 'https://gorv-portfolio-in.vercel.app/assets/images/reel-07-cover.jpg', tools: 'Premiere Pro · Motion Design', logos: ['logo-premiere', 'logo-aftereffects'] },
+      { id: '08', title: 'The Sunshine Immigration Consultancy', category: 'Ad Video', group: 'video', type: 'video', aspect: '9:16 Commercial', duration: '00:39:11', videoUrl: 'https://gorv-portfolio-in.vercel.app/assets/videos/reel-08.mp4', posterUrl: 'https://gorv-portfolio-in.vercel.app/assets/images/reel-08-cover.jpg', tools: 'Premiere Pro · Sound Design', logos: ['logo-premiere'] },
+      { id: '09', title: 'Hamirpur — Cinematic Opener', category: 'Ad Video', group: 'video', type: 'video', aspect: '9:16 Cinematic', duration: '00:31:22', videoUrl: 'https://gorv-portfolio-in.vercel.app/assets/videos/reel-09.mp4', posterUrl: 'https://gorv-portfolio-in.vercel.app/assets/images/reel-09-cover.jpg', tools: 'Premiere Pro · Speed Ramp', logos: ['logo-premiere', 'logo-aftereffects'] },
+      { id: '10', title: 'Study in the UK — IIE Education', category: 'Billboard Ad', group: 'graphics', type: 'image', aspect: 'Print / OOH', duration: '300 DPI PRINT', imageUrl: 'https://gorv-portfolio-in.vercel.app/assets/images/poster-01.jpg', tools: 'Photoshop · Illustrator', logos: ['logo-photoshop', 'logo-illustrator'] },
+      { id: '11', title: '"Achche Din" — Commentary', category: 'YouTube Thumbnail', group: 'graphics', type: 'image', aspect: '16:9 High-CTR', duration: '1920×1080', imageUrl: 'https://gorv-portfolio-in.vercel.app/assets/images/thumbnail-01.jpg', tools: 'Photoshop · YouTube CTR', logos: ['logo-photoshop', 'logo-youtube'] },
+      { id: '12', title: 'dHiL by Romi', category: 'Logo Design', group: 'logos', type: 'image', aspect: '1:1 Brand Mark', duration: 'VECTOR MASTER', imageUrl: 'https://gorv-portfolio-in.vercel.app/assets/images/logo-01.jpg', tools: 'Adobe Illustrator', logos: ['logo-illustrator'] },
+      { id: '13', title: '"Online Kotha" — Reaction', category: 'YouTube Thumbnail', group: 'graphics', type: 'image', aspect: '16:9 High-CTR', duration: '1920×1080', imageUrl: 'https://gorv-portfolio-in.vercel.app/assets/images/thumbnail-02.jpg', tools: 'Photoshop · YouTube CTR', logos: ['logo-photoshop', 'logo-youtube'] },
+      { id: '14', title: 'Reveal Your Brand Identity', category: 'Brand Post', group: 'graphics', type: 'image', aspect: 'Social Key Visual', duration: 'RGB DIGITAL', imageUrl: 'https://gorv-portfolio-in.vercel.app/assets/images/poster-02.jpg', tools: 'Photoshop · Typography', logos: ['logo-photoshop'] },
+      { id: '15', title: 'Editrify', category: 'Logo Design', group: 'logos', type: 'image', aspect: 'Agency Identity', duration: 'VECTOR SYSTEM', imageUrl: 'https://gorv-portfolio-in.vercel.app/assets/images/logo-02.jpg', tools: 'Illustrator · Brand System', logos: ['logo-illustrator', 'logo-editrify'] }
+    ];
+
+    let activeDisciplineTitle = disciplinesData[0].title;
+    let currentFilter = 'all';
+    let currentModalIndex = 0;
+    let currentSceneId = 'top';
+    const sceneOrder = ['top', 'disciplines', 'screening-room', 'dossier', 'dispatch'];
+
+    // =========================================================
+    // 60FPS CUSTOM CUBIC-BEZIER SMOOTH PAGE GLIDE ENGINE
+    // =========================================================
+    let glideAnimationId = null;
+
+    function easeOutQuint(t) {
+      return 1 - Math.pow(1 - t, 5);
+    }
+
+    function smoothGlideTo(targetSelector, duration = 950) {
+      const targetEl = document.querySelector(targetSelector);
+      if (!targetEl) return;
+
+      if (glideAnimationId) cancelAnimationFrame(glideAnimationId);
+
+      const headerOffset = 54;
+      const startY = window.pageYOffset;
+      const targetY = Math.max(0, targetEl.getBoundingClientRect().top + startY - headerOffset);
+      const distance = targetY - startY;
+
+      if (Math.abs(distance) < 4) return;
+
+      const startTime = performance.now();
+
+      function step(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = easeOutQuint(progress);
+
+        window.scrollTo(0, startY + distance * eased);
+
+        if (progress < 1) {
+          glideAnimationId = requestAnimationFrame(step);
+        } else {
+          glideAnimationId = null;
+        }
+      }
+
+      glideAnimationId = requestAnimationFrame(step);
+    }
+
+    // Cancel programmatic glide immediately if user manually wheels or touches
+    window.addEventListener('wheel', () => {
+      if (glideAnimationId) {
+        cancelAnimationFrame(glideAnimationId);
+        glideAnimationId = null;
+      }
+    }, { passive: true });
+
+    window.addEventListener('touchstart', () => {
+      if (glideAnimationId) {
+        cancelAnimationFrame(glideAnimationId);
+        glideAnimationId = null;
+      }
+    }, { passive: true });
+
+    function handleNavClick(e, selector) {
+      e.preventDefault();
+      smoothGlideTo(selector);
+    }
+
+    function glideToNextScene() {
+      const idx = sceneOrder.indexOf(currentSceneId);
+      const nextIdx = (idx + 1) % sceneOrder.length;
+      smoothGlideTo('#' + sceneOrder[nextIdx]);
+    }
+
+    function togglePageSnapMode() {
+      const htmlEl = document.documentElement;
+      const isSnap = htmlEl.classList.toggle('page-snap-active');
+      document.getElementById('snap-text').textContent = isSnap ? 'Snap: On' : 'Snap: Off';
+      showToast(isSnap ? 'Page-by-Page Scroll Snap Enabled' : 'Free Smooth Scroll Mode Enabled');
+    }
+
+    // =========================================================
+    // SCROLL PROGRESS BAR & ACTIVE PAGE SCENE OBSERVER
+    // =========================================================
+    let scrollTicking = false;
+    function updateScrollHUD() {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const docHeight = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      const progress = Math.min(1, Math.max(0, scrollTop / docHeight));
+      const bar = document.getElementById('scroll-progress-bar');
+      if (bar) {
+        bar.style.transform = `scaleX(${progress})`;
+      }
+      scrollTicking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!scrollTicking) {
+        requestAnimationFrame(updateScrollHUD);
+        scrollTicking = true;
+      }
+    }, { passive: true });
+
+    // Subtle 3D Viewfinder Tilt on Hero Portrait Card
+    function handleViewfinderTilt(e, cardEl) {
+      const rect = cardEl.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      cardEl.style.transform = `perspective(1000px) rotateY(${x * 6}deg) rotateX(${-y * 6}deg) translate3d(0, -2px, 0)`;
+    }
+
+    function resetViewfinderTilt(cardEl) {
+      cardEl.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) translate3d(0, 0, 0)';
+    }
+
+    // =========================================================
+    // INTERSECTION OBSERVER: PAGE-BY-PAGE STAGGERED REVEALS
+    // =========================================================
+    let revealObserver = null;
+
+    function initScrollRevealObserver() {
+      revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          }
+        });
+      }, {
+        threshold: 0.12,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      document.querySelectorAll('.reveal-up, .reveal-left, .reveal-scale, .project-card-anim').forEach(el => {
+        revealObserver.observe(el);
+      });
+
+      // Observe Adobe Skill Bars to animate from 0% to target width on scroll
+      const skillsSection = document.getElementById('adobe-skills-section');
+      if (skillsSection) {
+        const skillsObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              document.querySelectorAll('.skill-bar-fill').forEach((bar, i) => {
+                setTimeout(() => {
+                  bar.style.width = bar.dataset.width;
+                }, i * 110);
+              });
+            }
+          });
+        }, { threshold: 0.25 });
+        skillsObserver.observe(skillsSection);
+      }
+    }
+
+    // Render 9 Disciplines List — TOPIC NAMES ONLY + Staggered Left Reveal
+    function renderDisciplines() {
+      const container = document.getElementById('discipline-list');
+      container.innerHTML = disciplinesData.map((item, idx) => `
+        <div 
+          onmouseenter="inspectDiscipline(${idx})"
+          onclick="inspectDiscipline(${idx})"
+          id="disc-row-${idx}"
+          style="--stagger-delay: ${idx * 55}ms;"
+          class="reveal-left discipline-row ${idx === 0 ? 'active-track' : ''} px-6 sm:px-10 py-5 cursor-pointer flex items-center justify-between gap-4"
+        >
+          <div class="flex items-center gap-4 sm:gap-6">
+            <span class="font-mono text-xs sm:text-sm font-bold text-vermilion muted-tag px-2.5 py-1 swiss-border rounded">${item.id}</span>
+            <h3 class="font-display font-extrabold text-xl sm:text-2xl md:text-[26px] uppercase tracking-tight leading-none">${item.title}</h3>
+          </div>
+          <div class="flex items-center gap-3 font-mono text-[11px] shrink-0">
+            <span class="hidden sm:inline-block muted-tag px-2.5 py-1 rounded swiss-border uppercase">${item.aspect}</span>
+            <i class="ph-bold ph-arrow-up-right text-lg"></i>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    let inspectorTimeout = null;
+    function inspectDiscipline(index) {
+      const d = disciplinesData[index];
+      if (activeDisciplineTitle === d.title) return;
+      activeDisciplineTitle = d.title;
+
+      document.querySelectorAll('.discipline-row').forEach((row, idx) => {
+        row.classList.toggle('active-track', idx === index);
+      });
+
+      const inner = document.getElementById('inspector-card-inner');
+      if (inner) {
+        inner.classList.add('switching');
+        clearTimeout(inspectorTimeout);
+        inspectorTimeout = setTimeout(() => {
+          document.getElementById('inspector-id').textContent = `TRACK ${d.id} / 09`;
+          document.getElementById('inspector-aspect').textContent = `ASPECT: ${d.aspect}`;
+          document.getElementById('inspector-fps').textContent = d.fps;
+          document.getElementById('inspector-badge').textContent = d.badge;
+          document.getElementById('inspector-title').textContent = d.title;
+          document.getElementById('inspector-desc').textContent = d.desc;
+          document.getElementById('inspector-icon').className = `ph-duotone ${d.icon} text-5xl text-vermilion`;
+          document.getElementById('inspector-tags').innerHTML = d.tags.map(t =>
+            `<span class="font-mono text-[10px] px-2.5 py-1 rounded bg-paper/10 text-paper">${t}</span>`
+          ).join('');
+          inner.classList.remove('switching');
+        }, 140);
+      }
+    }
+
+    // Hero Studio Pose & Plain Backdrop Switcher
+    function setHeroStudioPose(mode) {
+      const stage = document.getElementById('hero-studio-stage');
+      const circle = document.getElementById('hero-studio-circle');
+      const img = document.getElementById('hero-studio-img');
+      const btns = {
+        offwhite: document.getElementById('pose-btn-offwhite'),
+        carbon: document.getElementById('pose-btn-carbon'),
+        closeup: document.getElementById('pose-btn-closeup')
+      };
+
+      Object.values(btns).forEach(b => {
+        b.className = 'px-2 py-0.5 rounded bg-paper/10 hover:bg-paper/20';
+      });
+      btns[mode].className = 'px-2 py-0.5 rounded bg-vermilion text-paper font-bold';
+
+      if (mode === 'offwhite') {
+        stage.style.backgroundColor = '#E6DEC8';
+        circle.style.backgroundColor = '#D8CEB8';
+        img.style.clipPath = 'url(#gourav-torso-cutout)';
+        img.style.transform = 'scale(1.04) translateY(2%)';
+        img.style.filter = 'contrast(1.04)';
+      } else if (mode === 'carbon') {
+        stage.style.backgroundColor = '#141312';
+        circle.style.backgroundColor = '#E8381B';
+        img.style.clipPath = 'url(#gourav-torso-cutout)';
+        img.style.transform = 'scale(1.06) translateY(2%)';
+        img.style.filter = 'contrast(1.08)';
+      } else if (mode === 'closeup') {
+        stage.style.backgroundColor = '#181615';
+        circle.style.backgroundColor = '#D4E824';
+        img.style.clipPath = 'url(#gourav-head-cutout)';
+        img.style.transform = 'scaleX(-1) scale(1.34) translateY(12%)';
+        img.style.filter = 'grayscale(100%) contrast(1.2)';
+      }
+    }
+
+    // Render All 15 Real Projects with Real Software SVG Logos & Staggered 3D Scroll Reveal
+    function renderPortfolio() {
+      const filtered = portfolioProjects.filter(p => currentFilter === 'all' ? true : p.group === currentFilter);
+
+      const gridContainer = document.getElementById('portfolio-grid-view');
+      gridContainer.innerHTML = filtered.map((item, idx) => {
+        const originalIndex = portfolioProjects.findIndex(x => x.id === item.id);
+        const isVideo = item.type === 'video';
+        const logoIcons = (item.logos || []).map(l => `<svg class="w-5 h-5 rounded shrink-0 shadow"><use href="#${l}"></use></svg>`).join('');
+        const staggerDelay = (idx % 3) * 95;
+
+        return `
+          <article 
+            onclick="openCinemaModal(${originalIndex})"
+            onmouseenter="handleCardMouseEnter(this)"
+            onmouseleave="handleCardMouseLeave(this)"
+            style="--card-delay: ${staggerDelay}ms;"
+            class="project-card-anim group cursor-pointer rounded-xl border border-paper/15 bg-inkSoft/70 overflow-hidden flex flex-col justify-between hover:border-vermilion shadow-lg"
+          >
+            <div class="px-4 py-2.5 bg-ink border-b border-paper/15 flex items-center justify-between font-mono text-[11px]">
+              <div class="flex items-center gap-2">
+                <span class="text-vermilion font-bold">FRAME ${item.id}</span>
+                <span class="text-paper/40">//</span>
+                <span class="uppercase text-chartreuse">${item.category}</span>
+              </div>
+              <div class="flex items-center gap-1.5">${logoIcons}</div>
+            </div>
+
+            <div class="relative overflow-hidden bg-black ${isVideo ? 'aspect-[9/13]' : 'aspect-[4/3]'} flex items-center justify-center">
+              ${isVideo ? `
+                <video 
+                  src="${item.videoUrl}" 
+                  poster="${item.posterUrl}" 
+                  muted 
+                  loop 
+                  playsinline 
+                  preload="metadata"
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                ></video>
+                <div class="absolute top-3 left-3 px-2.5 py-1 rounded bg-ink/80 backdrop-blur border border-paper/20 font-mono text-[10px] flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-vermilion animate-pulse"></span>
+                  <span class="video-status-label">HOVER TO PREVIEW</span>
+                </div>
+                <div class="absolute bottom-3 right-3 w-11 h-11 rounded-full bg-vermilion text-paper flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">
+                  <i class="ph-fill ph-play text-lg"></i>
+                </div>
+              ` : `
+                <img 
+                  src="${item.imageUrl}" 
+                  alt="${item.title}"
+                  loading="lazy"
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div class="absolute bottom-3 right-3 w-10 h-10 rounded-full bg-paper text-ink flex items-center justify-center shadow-xl group-hover:bg-chartreuse transition-colors">
+                  <i class="ph-bold ph-arrows-out-simple text-base"></i>
+                </div>
+              `}
+            </div>
+
+            <div class="p-4 bg-ink border-t border-paper/15 flex items-center justify-between gap-3">
+              <div>
+                <h3 class="font-display font-bold text-lg text-paper group-hover:text-chartreuse transition-colors leading-snug">${item.title}</h3>
+                <span class="font-mono text-[11px] text-paper/60 block mt-0.5">${item.tools} · ${item.aspect}</span>
+              </div>
+              <span class="font-mono text-[10px] px-2.5 py-1 rounded border border-paper/20 group-hover:border-vermilion group-hover:bg-vermilion text-paper uppercase whitespace-nowrap transition">
+                ${isVideo ? 'Screen Cut' : 'Inspect'}
+              </span>
+            </div>
+          </article>
+        `;
+      }).join('');
+
+      const tableContainer = document.getElementById('portfolio-table-view');
+      tableContainer.innerHTML = filtered.map((item) => {
+        const originalIndex = portfolioProjects.findIndex(x => x.id === item.id);
+        const isVideo = item.type === 'video';
+        const thumb = isVideo ? item.posterUrl : item.imageUrl;
+
+        return `
+          <div 
+            onclick="openCinemaModal(${originalIndex})"
+            class="px-6 sm:px-10 py-4 hover:bg-vermilion/15 cursor-pointer grid grid-cols-1 md:grid-cols-12 items-center gap-4 font-mono text-xs transition"
+          >
+            <div class="md:col-span-1"><span class="px-2 py-0.5 rounded bg-paper/10 text-chartreuse font-bold">#${item.id}</span></div>
+            <div class="md:col-span-4 flex items-center gap-3.5">
+              <img src="${thumb}" alt="${item.title}" class="w-14 h-10 object-cover rounded border border-paper/20 shrink-0" />
+              <span class="font-display font-bold text-base text-paper font-sans">${item.title}</span>
+            </div>
+            <div class="md:col-span-2"><span class="px-2.5 py-1 rounded bg-paper/10 text-paper uppercase text-[11px]">${item.category}</span></div>
+            <div class="md:col-span-3 text-paper/70">${item.tools}</div>
+            <div class="md:col-span-2 text-right"><span class="text-vermilion font-bold uppercase">${isVideo ? 'Play →' : 'View →'}</span></div>
+          </div>
+        `;
+      }).join('');
+
+      // Re-attach IntersectionObserver to newly rendered project cards
+      if (revealObserver) {
+        document.querySelectorAll('.project-card-anim').forEach(el => {
+          revealObserver.observe(el);
+        });
+      }
+    }
+
+    function handleCardMouseEnter(cardEl) {
+      const video = cardEl.querySelector('video');
+      const statusLabel = cardEl.querySelector('.video-status-label');
+      if (video) {
+        video.play().catch(() => {});
+        if (statusLabel) statusLabel.textContent = 'PREVIEWING (CLICK FOR SOUND)';
+      }
+    }
+
+    function handleCardMouseLeave(cardEl) {
+      const video = cardEl.querySelector('video');
+      const statusLabel = cardEl.querySelector('.video-status-label');
+      if (video) {
+        video.pause();
+        if (statusLabel) statusLabel.textContent = 'HOVER TO PREVIEW';
+      }
+    }
+
+    function filterProjects(group) {
+      currentFilter = group;
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.className = btn.dataset.filter === group
+          ? 'filter-btn px-3 py-1.5 rounded bg-vermilion text-paper font-bold uppercase transition'
+          : 'filter-btn px-3 py-1.5 rounded bg-paper/10 text-paper/80 hover:bg-paper/20 uppercase transition';
+      });
+      renderPortfolio();
+    }
+
+    function setPortfolioView(mode) {
+      const gridEl = document.getElementById('portfolio-grid-view');
+      const tableEl = document.getElementById('portfolio-table-view');
+      const gridBtn = document.getElementById('view-grid-btn');
+      const tableBtn = document.getElementById('view-table-btn');
+
+      if (mode === 'grid') {
+        gridEl.classList.remove('hidden');
+        tableEl.classList.add('hidden');
+        gridBtn.className = 'px-3 py-1 rounded bg-paper text-ink font-bold flex items-center gap-1.5 transition';
+        tableBtn.className = 'px-3 py-1 rounded text-paper/70 hover:text-paper flex items-center gap-1.5 transition';
+      } else {
+        gridEl.classList.add('hidden');
+        tableEl.classList.remove('hidden');
+        tableBtn.className = 'px-3 py-1 rounded bg-paper text-ink font-bold flex items-center gap-1.5 transition';
+        gridBtn.className = 'px-3 py-1 rounded text-paper/70 hover:text-paper flex items-center gap-1.5 transition';
+      }
+    }
+
+    // Cinema Lightbox Modal with Smooth Scale & Backdrop Transition
+    function openCinemaModal(index) {
+      currentModalIndex = index;
+      const item = portfolioProjects[index];
+      const modal = document.getElementById('cinema-modal');
+      const videoWrap = document.getElementById('modal-video-wrap');
+      const imageWrap = document.getElementById('modal-image-wrap');
+      const videoEl = document.getElementById('modal-video');
+      const imageEl = document.getElementById('modal-image');
+      const videoControls = document.getElementById('modal-video-controls');
+
+      document.getElementById('modal-index').textContent = `CUT ${item.id} / 15`;
+      document.getElementById('modal-category').textContent = item.category;
+      document.getElementById('modal-title-top').textContent = item.title;
+      document.getElementById('modal-title-bottom').textContent = item.title;
+      document.getElementById('modal-specs').textContent = `${item.category.toUpperCase()} · ${item.tools.toUpperCase()} · ${item.aspect.toUpperCase()}`;
+
+      if (item.type === 'video') {
+        imageWrap.classList.add('hidden');
+        videoWrap.classList.remove('hidden');
+        videoControls.classList.remove('hidden');
+        videoEl.src = item.videoUrl;
+        videoEl.poster = item.posterUrl;
+        videoEl.muted = false;
+        document.getElementById('modal-mute-btn').textContent = '🔊 AUDIO ON';
+        videoEl.play().catch(() => {});
+      } else {
+        videoEl.pause();
+        videoEl.src = '';
+        videoWrap.classList.add('hidden');
+        videoControls.classList.add('hidden');
+        imageWrap.classList.remove('hidden');
+        imageEl.src = item.imageUrl;
+      }
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      requestAnimationFrame(() => {
+        modal.classList.add('modal-open');
+      });
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCinemaModal() {
+      const modal = document.getElementById('cinema-modal');
+      const videoEl = document.getElementById('modal-video');
+      videoEl.pause();
+      modal.classList.remove('modal-open');
+      setTimeout(() => {
+        videoEl.src = '';
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = '';
+      }, 320);
+    }
+
+    function stepModalProject(direction) {
+      const nextIndex = (currentModalIndex + direction + portfolioProjects.length) % portfolioProjects.length;
+      openCinemaModal(nextIndex);
+    }
+
+    function frameStepModalVideo(secondsDelta) {
+      const videoEl = document.getElementById('modal-video');
+      if (!videoEl.src) return;
+      videoEl.pause();
+      videoEl.currentTime = Math.max(0, videoEl.currentTime + secondsDelta);
+    }
+
+    function toggleModalVideoPlay() {
+      const videoEl = document.getElementById('modal-video');
+      if (videoEl.paused) videoEl.play(); else videoEl.pause();
+    }
+
+    function toggleModalVideoMute() {
+      const videoEl = document.getElementById('modal-video');
+      videoEl.muted = !videoEl.muted;
+      document.getElementById('modal-mute-btn').textContent = videoEl.muted ? '🔇 MUTED' : '🔊 AUDIO ON';
+    }
+
+    window.addEventListener('keydown', (e) => {
+      const modal = document.getElementById('cinema-modal');
+      if (modal.classList.contains('hidden')) return;
+      if (e.key === 'Escape') closeCinemaModal();
+      if (e.key === 'ArrowRight') stepModalProject(1);
+      if (e.key === 'ArrowLeft') stepModalProject(-1);
+    });
+
+    function updateHeroScrubber(val) {
+      const v = parseInt(val, 10);
+      const readout = document.getElementById('scrubber-readout');
+      if (v < 25) readout.textContent = 'STAGE 01/04: RAW FOOTAGE INGEST & STORY LOGGING';
+      else if (v < 55) readout.textContent = 'STAGE 02/04: RHYTHM & HIGH-RETENTION HOOK CUTTING';
+      else if (v < 85) readout.textContent = 'STAGE 03/04: AFTER EFFECTS MOTION, CAPTIONS & SFX';
+      else readout.textContent = 'STAGE 04/04: COLOR GRADE & 4K/60FPS MASTER DELIVERY';
+    }
+
+    function toggleDarkroom() {
+      const htmlEl = document.documentElement;
+      const isDark = htmlEl.classList.toggle('darkroom');
+      document.getElementById('theme-text').textContent = isDark ? 'Off-White' : 'Darkroom';
+      showToast(isDark ? 'Switched to Darkroom Screening Mode' : 'Switched to Warm Off-White Paper');
+    }
+
+    // Live 24fps SMPTE Timecode
+    let frameCounter = 0;
+    setInterval(() => {
+      frameCounter = (frameCounter + 1) % 24;
+      const now = new Date();
+      const hh = String(now.getHours()).padStart(2, '0');
+      const mm = String(now.getMinutes()).padStart(2, '0');
+      const ss = String(now.getSeconds()).padStart(2, '0');
+      const ff = String(frameCounter).padStart(2, '0');
+      const tcEl = document.getElementById('live-timecode');
+      if (tcEl) tcEl.textContent = `${hh}:${mm}:${ss}:${ff}`;
+    }, 1000 / 24);
+
+    // Cut Brief Configurator
+    let selectedBriefServices = ['Short-Video Edits'];
+    let selectedBriefCadence = 'Single Hero Project';
+
+    function toggleBriefPill(btn, serviceName) {
+      const idx = selectedBriefServices.indexOf(serviceName);
+      if (idx > -1) {
+        if (selectedBriefServices.length > 1) {
+          selectedBriefServices.splice(idx, 1);
+          btn.className = 'brief-pill px-3.5 py-2 rounded-lg font-mono text-xs swiss-border hover:border-vermilion transition';
+          btn.textContent = serviceName;
+        }
+      } else {
+        selectedBriefServices.push(serviceName);
+        btn.className = 'brief-pill px-3.5 py-2 rounded-lg font-mono text-xs bg-vermilion text-paper font-bold transition';
+        btn.textContent = '✓ ' + serviceName;
+      }
+      updateBriefPreview();
+    }
+
+    function setBriefCadence(btn, cadence) {
+      selectedBriefCadence = cadence;
+      document.querySelectorAll('.cadence-btn').forEach(b => {
+        b.className = 'cadence-btn py-2.5 px-3 rounded-lg swiss-border hover:border-vermilion transition';
+      });
+      btn.className = 'cadence-btn py-2.5 px-3 rounded-lg bg-ink text-paper font-bold transition';
+      updateBriefPreview();
+    }
+
+    function selectBriefServiceFromInspector(e) {
+      if (e) e.preventDefault();
+      selectedBriefServices = [activeDisciplineTitle];
+      updateBriefPreview();
+      showToast(`Loaded "${activeDisciplineTitle}" into Brief Builder`);
+      smoothGlideTo('#dispatch');
+    }
+
+    function getFormattedBriefText() {
+      const name = document.getElementById('brief-name').value.trim() || 'A Potential Client';
+      const link = document.getElementById('brief-link').value.trim();
+      const notes = document.getElementById('brief-notes').value.trim();
+
+      let msg = `Hi Gourav (Editrify)! I'm ${name}. I'd love to commission: ${selectedBriefServices.join(', ')} [${selectedBriefCadence}].`;
+      if (notes) msg += ` Goal/Details: "${notes}".`;
+      if (link) msg += ` Reference/Footage Link: ${link}`;
+      return msg;
+    }
+
+    function updateBriefPreview() {
+      const previewEl = document.getElementById('brief-preview-text');
+      if (previewEl) previewEl.textContent = getFormattedBriefText();
+    }
+
+    function sendBriefViaWhatsApp() {
+      const text = encodeURIComponent(getFormattedBriefText());
+      window.open(`https://wa.me/916239205320?text=${text}`, '_blank', 'noopener,noreferrer');
+    }
+
+    function sendBriefViaEmail() {
+      const subject = encodeURIComponent(`Project Commission Brief — ${selectedBriefServices[0]} // Editrify`);
+      const body = encodeURIComponent(getFormattedBriefText());
+      window.location.href = `mailto:editrify.in@gmail.com?subject=${subject}&body=${body}`;
+    }
+
+    function copyEmailAddress() {
+      const email = 'editrify.in@gmail.com';
+      const tempInput = document.createElement('textarea');
+      tempInput.value = email;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+
+      const label = document.getElementById('copy-email-label');
+      label.textContent = 'Copied!';
+      showToast('Email editrify.in@gmail.com copied to clipboard!');
+      setTimeout(() => { label.textContent = 'Copy Email'; }, 2500);
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-message').textContent = msg;
+      toast.classList.remove('translate-y-24', 'opacity-0');
+      setTimeout(() => {
+        toast.classList.add('translate-y-24', 'opacity-0');
+      }, 2800);
+    }
+
+    // Initialize Portfolio & Page-by-Page Scroll Choreography
+    window.addEventListener('DOMContentLoaded', () => {
+      renderDisciplines();
+      renderPortfolio();
+      updateBriefPreview();
+      initScrollRevealObserver();
+      updateScrollHUD();
+    });
+  </script>
+</body>
+</html>
